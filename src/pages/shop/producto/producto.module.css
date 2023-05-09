@@ -1,0 +1,168 @@
+.contenedor {
+  height: 100vh;
+  /* padding-left: 250px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.volver{
+  position: absolute;
+  top: 0.5%;
+  right: 5%;
+  font-size: 35px;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.volver i {
+  font-size: 30px;
+}
+.volver span{
+  font-size: 10px;
+  font-weight: 700;
+}
+.volver:hover {
+ color: var(--primary);
+}
+.textura {
+  width: 40%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    30deg,
+    rgba(0, 0, 0, 0) 45px,
+    rgba(0, 0, 0, 0) 55px,
+    rgb(175, 174, 174, 0) 40px,
+    rgb(175, 174, 174, 0.1) 59.8px
+  );
+}
+
+.cardLeft {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 5px solid var(--primary);
+  border-bottom: 5px solid var(--primary);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* .cardLeft img {
+  width: auto;
+  height: 100vh;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 40%);
+  object-fit: cover;
+} */
+
+.cardRigth {
+  border-top: 5px solid var(--primary);
+  border-bottom: 5px solid var(--primary);
+  height: 100%;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: space-evenly;
+ 
+}
+
+.cardRigth h1 {
+  font-size: 40px;
+}
+.descripcion {
+  display: flex;
+  flex-direction: column;
+}
+.descripcion b {
+  color: var(--primary);
+}
+.precio {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cant {
+  border-radius: 12px;
+  display: flex;
+  width: 25%;
+  justify-content: space-around;
+  font-size: 25px;
+  background-color: white;
+  border: solid 1px black;
+}
+.cant button:hover {
+  color: var(--primary);
+}
+
+.precioTotal {
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+@media only screen and (max-width: 1024px) {
+  .contenedor {
+    height: auto;
+    padding-left: 0px;
+    flex-direction: column;
+    padding-bottom: 0px;
+  }
+
+  .volver{
+    position: absolute;
+    top: 85px;
+    left: 16px;
+    width: min-content;
+  }
+  .volver i {
+    font-size: 35px;
+  }
+  .volver span{
+    display: none;
+  }
+
+  .cardLeft {
+    width: 100%;
+  }
+  
+  .cardLeft img {
+    height: auto;
+  }
+
+  .cardRigth {
+    width: 100%;
+    border-top: none;
+    gap: 1rem;  
+    padding: 1rem 1rem;
+    padding-bottom: 7rem;
+
+  }
+  .cardRigth h1 {
+    text-align: center;
+    font-size: 35px;
+  }
+  .precio {
+    justify-content: space-between;
+    gap: 0;
+    display: none;
+  }
+  .botonDesktop{
+    display: none;
+  }
+  .cant {
+    width: 50%;
+  }
+}
