@@ -259,15 +259,7 @@ const ProductoUpdate = (props) => {
           ocultar = 1;
         }
       } else {
-        // if (
-        //   !formulario.arrmedidasIndiv ||
-        //   formulario.arrmedidasIndiv.length === 0 ||
-        //   formulario.arrimagesIndiv.length === 0
-        // ) {
-        //   ocultar = 1;
-        // }
-
-        if (formulario.arrimagesIndiv.length === 0) {
+        if (formulario.arrimagesIndiv?.length === 0) {
           ocultar = 1;
         }
       }
@@ -339,16 +331,11 @@ const ProductoUpdate = (props) => {
         <meta name="description" content={formulario.descripcion} />
         <link rel="icon" href="/media/logoPatio.png" />
       </Head>
-      <form className="bg-gray-200 h-screen pt-24 p-8 fullScroll">
-        <div className="bg-white rounded-lg shadow-xl w-full  p-4">
-          {/* <div className="flex justify-center items-center">
-            <div className="flex bg-primary-200 rounded-full px-4 py-3 border-2 border-primary-300">
-              <i className="bx bxs-store bx-tada-hover text-white text-3xl"></i>
-            </div>
-          </div> */}
+      <form className=" h-screen  p-4 fullScroll Outfit">
+        <div className="bg-white rounded-3xl shadow-xl w-full  p-4  border-2 border-secondary">
           <div className="flex justify-start mb-4 ">
             <div className="flex">
-              <h1 className="text-secondary-500 font-bold md:text-xl  uppercase font-commuter">
+              <h1 className="text-secondary font-bold md:text-xl  uppercase ">
                 Ficha de articulo
               </h1>
             </div>
@@ -365,7 +352,7 @@ const ProductoUpdate = (props) => {
                     Codigo
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 text-right"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     type="text"
                     id="codart"
                     name="codart"
@@ -387,7 +374,7 @@ const ProductoUpdate = (props) => {
                     </abbr>
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600"
+                    className="px-3 h-10 border-2 border-secondary rounded-[20px] mt-1 "
                     id="categ"
                     name="categ"
                     readOnly
@@ -418,7 +405,7 @@ const ProductoUpdate = (props) => {
                     </abbr>
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     id="subc"
                     name="subc"
                     readOnly
@@ -451,7 +438,7 @@ const ProductoUpdate = (props) => {
                     </abbr>
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     type="text"
                     placeholder=""
                     id="marca"
@@ -484,7 +471,7 @@ const ProductoUpdate = (props) => {
                     </abbr>
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     type="text"
                     placeholder=""
                     id="modelo"
@@ -509,7 +496,7 @@ const ProductoUpdate = (props) => {
                     </abbr>
                   </label>
                   <select
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     id="moneda"
                     name="moneda"
                     value={formulario.moneda}
@@ -533,7 +520,7 @@ const ProductoUpdate = (props) => {
                     </abbr>
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 text-right"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     type="text"
                     min="1"
                     placeholder="0,00"
@@ -551,7 +538,7 @@ const ProductoUpdate = (props) => {
                     Precio Compra
                   </label>
                   <input
-                    className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 text-right"
+                    className="px-3 h-10  border-2 border-secondary rounded-[20px] mt-1 "
                     type="number"
                     placeholder="0,00"
                     id="preciocompra"
@@ -571,7 +558,7 @@ const ProductoUpdate = (props) => {
                     Breve Descripcion
                   </label>
                   <textarea
-                    className="px-3 py-2 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600"
+                    className="px-3 py-2 h-10 border-2 border-secondary rounded-[20px] mt-1 "
                     id="descripBreve"
                     name="descripBreve"
                     onChange={onChange}
@@ -588,7 +575,7 @@ const ProductoUpdate = (props) => {
                     Descripcion
                   </label>
                   <textarea
-                    className="px-3 py-2 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 min-h-[150px]"
+                    className="px-3 py-2 h-10  border-2 border-secondary rounded-[20px] mt-1  min-h-[150px]"
                     id="descripcion"
                     name="descripcion"
                     value={formulario.descripcion}
@@ -602,11 +589,11 @@ const ProductoUpdate = (props) => {
                 <div className="flex items-center justify-between w-full ">
                   <div
                     className={`uppercase h-10  px-4 text-sm
-                               font-bold text-light rounded-xl
+                               font-bold text-light rounded-[20px]
                                 md:text-sm flex items-center justify-between gap-4
-                              w-full shadow transition-all border-2 border-secondary-500 ${
+                              w-full shadow transition-all border-2 border-secondary ${
                                 formulario.typeCatalog === 0
-                                  ? 'bg-secondary-500 text-white'
+                                  ? 'bg-secondary text-white'
                                   : ' text-black'
                               }`}
                   >
@@ -617,24 +604,16 @@ const ProductoUpdate = (props) => {
                     >
                       Imagenes y medidas
                     </span>
-                    {/* <span
-                      aria-hidden
-                      onClick={(ev) => infoUser(ev, 'typeCatalog', 0)}
-                      className="material-icons-outlined cursor-pointer"
-                      title="Clickea y mira la informacion!"
-                    >
-                      contact_support
-                    </span> */}
                   </div>
                 </div>
                 <div className="flex items-center justify-between w-full ">
                   <div
                     className={`uppercase h-10  px-4 text-sm
-                    font-bold text-light rounded-xl
+                    font-bold text-light rounded-[20px]
                    md:text-sm flex items-center justify-between gap-4
-                   w-full shadow border-2 border-secondary-500 ${
+                   w-full shadow border-2 border-secondary ${
                      formulario.typeCatalog === 1
-                       ? 'bg-secondary-500 text-white'
+                       ? 'bg-secondary text-white'
                        : ' text-black'
                    }`}
                   >
@@ -669,7 +648,7 @@ const ProductoUpdate = (props) => {
             <div className="flex items-center justify-between w-full max-w-xs ">
               <div
                 className={`uppercase h-10  px-4 text-sm
-                    font-bold text-light rounded-xl
+                    font-bold text-light rounded-[20px]
                    md:text-sm flex items-center justify-between gap-4
                    w-full shadow ${
                      formulario.visible === 0

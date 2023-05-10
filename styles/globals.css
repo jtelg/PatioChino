@@ -109,6 +109,7 @@ a {
 .swiper-button-prev {
   color: white !important;
   background-color: #1b72bf;
+  border: white 2px solid;
   border-radius: 100%;
   width: 30px !important;
   height: 30px !important;
@@ -124,6 +125,7 @@ a {
 .swiper-button-next {
   color: white !important;
   background-color: #1b72bf;
+  border: white 2px solid;
   border-radius: 100%;
   width: 30px !important;
   height: 30px !important;

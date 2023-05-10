@@ -149,11 +149,11 @@ const ImageForm = (props) => {
   };
   return (
     <>
-      <div className="rounded py-2   mt-4 mb-4">
-        <h1 className="font-bolder text-lg font-commuter !lowercase text-secondary-500 ">
+      <div className="rounded py-2   mt-4 mb-4 ">
+        <h1 className="font-bolder text-lg font-commuter !lowercase text-secondary font-bold ">
           Imagenes y medidas
         </h1>
-        <p className="text-[13px] text-black border-2 p-2 rounded-xl  ">
+        <p className="text-[13px] text-black border-2 border-secondary rounded-[20px] mt-1  p-2  ">
           Tiene la posibilidad de agregar imagenes ilimitadas, asi tambien, como
           podra seleccionar entre las medidas cargadas.
         </p>
@@ -179,6 +179,7 @@ const ImageForm = (props) => {
               name="Imgcarga"
               onChange={onFileChange()}
               multiple
+              className="hidden"
             />
           </label>
         </div>
@@ -218,7 +219,7 @@ const ImageForm = (props) => {
           Medidas
         </label>
         <input
-          className="w-full px-3 h-[42px] mt-1 rounded-lg border-2 border-primary-300 focus:border-primary-600 text-right"
+          className="w-full px-3 h-[42px]  border-2 border-secondary rounded-[20px] mt-1"
           type="text"
           placeholder="Medidas disponibles"
           id="medida"

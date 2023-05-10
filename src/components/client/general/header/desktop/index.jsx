@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 import localStorage from '../../../../../utils/localstorage.utils';
+import servusos from '../../../../../utils/usos.utils';
 
-const HeaderDesktop = () => {
+const HeaderDesktop = ({ personalInfo, pedido }) => {
   const router = useRouter();
-  const state = useSelector((s) => s.globalVars);
   const sessionLocal = localStorage.getFromStorage('session');
   const [buttonAdmin, setButtonAdmin] = useState(false);
 
@@ -39,9 +38,19 @@ const HeaderDesktop = () => {
           )}
         </div>
         <div className="text-primary-500 flex items-center justify-around">
-          <i className="bx bxl-whatsapp text-[40px] font-medium"></i>
-          <i className="bx bxl-instagram text-[40px] font-medium "></i>
-          <i className="bx bxl-facebook text-[40px] font-medium "></i>
+          <button
+            onClick={() =>
+              servusos.SendWhatsapp(personalInfo[0]?.valor, pedido)
+            }
+          >
+            <i className="bx bxl-whatsapp text-[40px] font-medium"></i>
+          </button>
+          <a href={personalInfo[1]?.valor} target="_blank" rel="noreferrer">
+            <i className="bx bxl-instagram text-[40px] font-medium "></i>
+          </a>
+          <a href={personalInfo[2]?.valor} target="_blank" rel="noreferrer">
+            <i className="bx bxl-facebook text-[40px] font-medium "></i>
+          </a>
         </div>
       </div>
     </div>

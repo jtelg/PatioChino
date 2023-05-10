@@ -5,23 +5,17 @@ import { useSelector } from 'react-redux';
 
 import ServUsos from '../../../../../utils/usos.utils';
 
-const HeaderMobile = () => {
+const HeaderMobile = ({ personalInfo, pedido }) => {
   const router = useRouter();
   const state = useSelector((s) => s);
 
   const [open, setOpen] = useState(false);
   const [arr_nav, setItemNav] = useState([]);
-  const [personalInfo, setPersonalInfo] = useState([]);
-
-  const pedido = `
-  ¡Hola! Buenas noches, tengo una consulta.
-`;
 
   useEffect(() => {
     if (state.arr_nav) {
       setItemNav(state.arr_nav.data || []);
     }
-    setPersonalInfo(state.globalVars || []);
 
     setOpen(false);
   }, [router, state]);

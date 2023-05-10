@@ -12,15 +12,19 @@ import { Navigation, Pagination } from 'swiper';
 const arr_img = [
   {
     id: 1,
-    img: '/media/EjemploHome.png'
+    img: '/media/EjemploHome1.png'
   },
   {
     id: 2,
-    img: '/media/EjemploHome.png'
+    img: '/media/EjemploHome2.png'
   },
   {
     id: 3,
-    img: '/media/EjemploHome.png'
+    img: '/media/EjemploHome3.png'
+  },
+  {
+    id: 4,
+    img: '/media/EjemploHome4.png'
   }
 ];
 
@@ -36,15 +40,11 @@ export default function Carousel() {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper  md:rounded-[40px] rounded-[20px] boxShadow max-h-[90vh]"
+        className="mySwiper  md:rounded-[40px] rounded-[20px] boxShadow"
       >
         {arr_img.map((img) => (
-          <SwiperSlide key={img.id} className="w-full h-full max-h-[90vh]">
-            <img
-              src={img.img}
-              alt="foto"
-              className=" w-full h-full max-h-[90vh]"
-            />
+          <SwiperSlide key={img.id} className="w-full h-full">
+            <img src={img.img} alt="foto" className=" w-full h-full" />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -105,7 +105,7 @@ const ModalEnvioUse = (arr_cartprods, open, setOpen, user) => {
       tipo_pago: entrega.tipopago,
       seguimiento_idestado: 1,
       comentario: entrega.comentario,
-      estado: 'No Visible',
+      estado: 'Pendiente',
       anulado_porque: null,
       fec_anulado: null
     };

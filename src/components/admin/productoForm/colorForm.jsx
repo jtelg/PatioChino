@@ -112,11 +112,7 @@ const ColorForm = (props) => {
     }
     return toast.error(`error al agregar el Color`);
   };
-  // const newcolorServer = async (data) => {
-  //   const re = await APIConsultas.color.ADD(data);
-  //   if (re) return toast.success(`Color agregado al listado`);
-  //   return toast.error(`error al agregar el Color`);
-  // };
+
   const deleteColor = async (e, index) => {
     e.preventDefault();
     const newArr = [...arr_inpscolor];
@@ -133,15 +129,6 @@ const ColorForm = (props) => {
       }
     };
     props.setUpdate(obj_arr);
-
-    // const obj = {
-    //   preventDefault: () => {},
-    //   target: {
-    //     name: 'visible',
-    //     value: ctrlVisible(newArr)
-    //   }
-    // };
-    // props.setUpdate(obj);
   };
   const deletecolorServer = async (data) => {
     const re = await APIConsultas.color.DELETE(data);
@@ -246,10 +233,10 @@ const ColorForm = (props) => {
       <div className="cont-imgs w-full md:mt-0 my-4">
         <div className="flex flex-col gap-4 mb-2">
           <div className="rounded py-2  mt-4 mb-4">
-            <h1 className="font-bold text-lg  font-commuter !lowercase text-secondary-500">
+            <h1 className="font-bold text-lg  font-commuter !lowercase text-secondary">
               COLORES, IMAGENES Y MEDIDAS
             </h1>
-            <p className="text-xs text-black border-2 p-2 rounded-xl">
+            <p className="text-xs text-black border-2 border-secondary  p-2 rounded-[20px]">
               Cada color tendrá la posibilidad de agregar imagenes ilimitadas, a
               su vez, se le permitira asignar medidas para mostrar en el
               catalogo al cliente. Cuando el cliente haga click sobre un color

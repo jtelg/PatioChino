@@ -2,15 +2,17 @@ import { Component } from 'react';
 
 class CellEstadoVenta extends Component {
   colorsCells = {
-    Anulado: 'bg-red-500',
     'Pendiente de confirmacion': 'bg-yellow-300',
+    Anulado: 'bg-red-500',
     'Preparando pedido': 'bg-azul-500',
-    'Listo para enviar/retirar': 'bg-naranja-500',
-    'Pedido enviado/retirado': 'bg-green-500'
+    'Pedido enviado/retirado': 'bg-green-500',
+    'Listo para enviar/retirar': 'bg-naranja-500'
   };
 
   setColorEstadoVenta(row) {
-    if (row.estado === 'Anulado') return this.colorsCells[row.estado];
+    if (row.estado === 'Anulado') {
+      return this.colorsCells[row.estado];
+    }
     return this.colorsCells[row.vista_admin];
   }
 
