@@ -14,7 +14,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="md:w-[25%] md:h-screen">
+    <div className="md:w-[25%] max-w-[350px] md:h-screen">
       <div className="md:block hidden h-full">
         <HeaderDesktop
           personalInfo={personalInfo}
