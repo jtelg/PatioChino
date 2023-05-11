@@ -1,4 +1,4 @@
-import { CARRITO_ADD, CARRITO_DELETE } from '../../../../../redux/actions';
+import { CARRITO_ADD } from '../../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import APIConsultas from '../../../../../services/consultas';
