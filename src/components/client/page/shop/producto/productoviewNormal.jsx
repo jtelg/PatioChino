@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import APIConsultas from '../../../../../services/consultas';
 import Link from 'next/link';
 import Carousel from '../../../../utils/carousel';
-import Boton from '../../../../utils/button';
 import { useRouter } from 'next/router';
 
 const ProdNormalUse = (props) => {
@@ -36,6 +35,7 @@ const ProdNormalUse = (props) => {
   }, [props]);
 
   const arr_cartprods = useSelector((s) => s.CART_DATA);
+  console.log(arr_cartprods);
   useEffect(() => {
     const prod = arr_cartprods?.find(
       (prod) => prod.idart === props.data_prod.idart
@@ -97,8 +97,8 @@ const ProductoNormal = (props) => {
   } = ProdNormalUse(props);
   return (
     <>
-      <div className="flex justify-between items-center pb-2 pt-3 px-4 gap-3">
-        <div className=" w-full flex  justify-between  py-4 items-start  border-b-2 border-[#DEDBD3]">
+      <div className="flex  justify-between items-center pb-2 md:pt-3 pt-[80px]  px-4 gap-3">
+        <div className=" w-full flex  justify-between  py-4 items-start  border-b-2 border-[#DEDBD3] relative">
           <div className="flex items-center gap-1  relative top-4 sm:top-0">
             <Link href="/shop">
               <i className="bx bx-chevron-left text-3xl font-bold text-primary-500"></i>
@@ -108,7 +108,7 @@ const ProductoNormal = (props) => {
             </span>
           </div>
           {arr_cartprods?.length > 0 && (
-            <div className="relative top-1 right-1 hidden lg:flex items-center justify-center">
+            <div className="relative md:top-1 top-3 right-1  lg:flex items-center justify-center">
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-[1.4rem] h-[1.4rem] flex items-center justify-center rounded-full  border-2 border-[#f7f4eb]">
                 {arr_cartprods.length}
               </span>
@@ -123,7 +123,7 @@ const ProductoNormal = (props) => {
         </div>
       </div>
       <div className="p-4 ">
-        <div className="bg-white flex rounded-[20px] overflow-hidden shadow">
+        <div className="bg-white flex md:flex-row flex-col rounded-[20px] overflow-hidden shadow">
           <div className="cardLeft">
             <div className="w-full overflow-hidden flex justify-center">
               <Carousel
@@ -131,16 +131,16 @@ const ProductoNormal = (props) => {
                 images={arr_imgs}
                 info={false}
                 buttons={true}
-                height=" h-[70vh]"
+                height=" md:h-[70vh] h-[30vh]"
               />
             </div>
           </div>
-          <div className="w-[50%] flex flex-col p-4 h-full justify-between gap-4 Outfit">
+          <div className="md:w-[50%] flex flex-col p-4 h-full justify-between md:gap-4 gap-1 Outfit">
             <div>
-              <h1 className="text-3xl font-bold text-secondary ">
+              <h1 className="md:text-3xl text-2xl font-bold text-secondary ">
                 {producto.modelo}
               </h1>
-              <div className="descripcion h-[200px] mt-3">
+              <div className="descripcion md:h-[200px] md:mt-3 mt-1">
                 <p className="text-sm">{producto.descripcion}</p>
               </div>
             </div>
@@ -149,9 +149,7 @@ const ProductoNormal = (props) => {
               <textarea
                 name="comentario"
                 id="comentario"
-                cols="10"
-                rows="3"
-                className="border-[1px] text-base rounded-xl outline-none border-black px-4 py-2 mt-2"
+                className="border-[1px] text-base rounded-xl outline-none border-black px-4 py-2 mt-2 md:h-[100px] h-[70px]"
                 onChange={onChange}
                 value={producto.comentario}
               ></textarea>
@@ -167,20 +165,18 @@ const ProductoNormal = (props) => {
                     <span>+</span>
                   </button>
                 </div>
-                <div className=" border border-secondary text-secondary w-1/2 rounded-[20px] flex items-center justify-center font-bold">
+                <div className=" border border-secondary text-secondary md:text-base p-1 text-sm w-1/2 rounded-[20px] flex items-center justify-center font-bold">
                   <span>${producto.precioventa * producto.cantidadForm}</span>
                 </div>
               </div>
               <div className="w-[50%] rounded-[20px]">
-                <Boton
-                  color={'primary'}
+                <button
                   onClick={() => agregarCarrito()}
-                  paddingX={'1rem'}
-                  bRadius={'20px'}
+                  className="bg-[#092640] text-white flex gap-1 items-center justify-center w-full py-1 rounded-[20px] shadow md:text-base text-sm"
                 >
                   <span className="material-icons"> shopping_cart </span>
                   Añadir al carrito
-                </Boton>
+                </button>
               </div>
             </div>
           </div>
