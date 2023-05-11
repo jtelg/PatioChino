@@ -121,7 +121,7 @@ const card_info = [
 ];
 const ListCard = () => {
   return (
-    <div className="w-full flex md:flex-wrap flex-row overflow-x-auto md:gap-0 gap-4  ">
+    <div className="w-full flex md:flex-wrap flex-row overflow-x-auto md:gap-0 gap-4  h-screen ">
       {card_info.map((card) => (
         <Card key={card.id} info={card}></Card>
       ))}
