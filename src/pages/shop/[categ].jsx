@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import CategFilters from '../../components/client/page/shop/filtros/desktop';
 import CategxProd from '../../components/client/page/shop/categProd';
 import Filtros from '../../components/client/page/shop/filtros';
 

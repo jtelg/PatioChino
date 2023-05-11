@@ -38,7 +38,7 @@ const Filtros = ({ setParams }) => {
       <div className="relative">
         <button
           onClick={() => router.push('/resumen')}
-          className="bg-primary-500 text-white p-6 rounded-full w-10 h-10 flex items-center justify-center boxShadow"
+          className="bg-primary-500 text-white p-6 md:p-4 rounded-full w-10 h-10 flex items-center justify-center boxShadow"
         >
           <i className="bx bx-cart text-2xl font-thin"></i>
         </button>

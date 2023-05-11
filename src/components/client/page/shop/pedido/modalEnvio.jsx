@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import APIConsultas from '../../../../../services/consultas';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
-import senderFRONT from '../../../../../utils/senderwpp.utils';
 import { CARRITO_DELETE_ALL } from '../../../../../redux/actions';
 
 const style = {
@@ -122,27 +121,14 @@ const ModalEnvioUse = (arr_cartprods, open, setOpen, user) => {
         showConfirmButton: false
       });
       const obj = venta_add();
-      const re = await APIConsultas.ventas.VENTAS_ADD(
-        obj,
-        arr_cartprods,
-        entrega
-      );
-      // senderFRONT.enviaPedido(
-      //   globalVars[0].valor,
-      //   entrega,
-      //   arr_cartprods,
-      //   re.insertId
-      // );
+      await APIConsultas.ventas.VENTAS_ADD(obj, arr_cartprods, entrega);
+
       dispatch(CARRITO_DELETE_ALL());
       Swal.close();
       router.push('/');
     } catch (error) {
       console.error('alta de venta ', error);
     }
-
-    // } else {
-    //   return toast.error(`Error al del pedido.`);
-    // }
   };
   return {
     handleClose,

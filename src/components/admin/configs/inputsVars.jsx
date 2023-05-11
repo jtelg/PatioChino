@@ -1,12 +1,11 @@
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import APIConsultas from '../../../services/consultas';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+
 const InputsVar = (props) => {
   const [variablesNew, setVariablesNew] = useState();
   const [timer, setTimer] = useState(null);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
