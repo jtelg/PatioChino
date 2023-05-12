@@ -10,6 +10,9 @@ const ProdNormalUse = (props) => {
   const dispatch = useDispatch();
   const [producto, setProducto] = useState(props.data_prod);
   const [arr_imgs, setArr_imgs] = useState([]);
+  const [presentacion, setPresentacion] = useState(props.data_prod.precioventa);
+  const [precioFinal, setPrecioFinal] = useState(props.data_prod.precioventa);
+
   const router = useRouter();
   useEffect(() => {
     if (props.data_prod.typeCatalog === 0) {
@@ -35,7 +38,6 @@ const ProdNormalUse = (props) => {
   }, [props]);
 
   const arr_cartprods = useSelector((s) => s.CART_DATA);
-  console.log(arr_cartprods);
   useEffect(() => {
     const prod = arr_cartprods?.find(
       (prod) => prod.idart === props.data_prod.idart
@@ -45,10 +47,11 @@ const ProdNormalUse = (props) => {
     setProducto({
       ...props.data_prod,
       cantidadForm,
-      comentario
+      comentario,
+      precioFinal
     });
     props.data_prod.cantidadForm = cantidadForm;
-  }, [arr_cartprods, props.data_prod]);
+  }, [arr_cartprods, props.data_prod, precioFinal]);
 
   const CountChange = (index) => {
     let count = producto.cantidadForm;
@@ -74,6 +77,11 @@ const ProdNormalUse = (props) => {
     dispatch(CARRITO_ADD(producto));
   };
 
+  const changePresent = (e) => {
+    setPresentacion(e.target.value);
+    setPrecioFinal(e.target.value);
+  };
+
   return {
     producto,
     arr_cartprods,
@@ -81,7 +89,10 @@ const ProdNormalUse = (props) => {
     CountChange,
     agregarCarrito,
     onChange,
-    router
+    router,
+    presentacion,
+    changePresent,
+    precioFinal
   };
 };
 
@@ -93,7 +104,10 @@ const ProductoNormal = (props) => {
     CountChange,
     agregarCarrito,
     onChange,
-    router
+    router,
+    presentacion,
+    changePresent,
+    precioFinal
   } = ProdNormalUse(props);
   return (
     <>
@@ -140,8 +154,60 @@ const ProductoNormal = (props) => {
               <h1 className="md:text-3xl text-2xl font-bold text-secondary ">
                 {producto.modelo}
               </h1>
-              <div className="descripcion md:h-[200px] md:mt-3 mt-1">
+              <div className="descripcion md:h-[80px] md:mt-3 mt-1 ">
                 <p className="text-sm">{producto.descripcion}</p>
+              </div>
+              <div className="border-y py-4">
+                <h1 className="text-base font-bold">Presentacion</h1>
+                <ul className="w-full text-sm space-y-1">
+                  <li className="w-full flex items-center justify-between">
+                    <span className="text-gray-400 font-semibold">
+                      Seleccioná las opciones que quieras.
+                    </span>
+                  </li>
+                  <li className="w-full">
+                    <div className="flex gap-1 ">
+                      <input
+                        id="extras"
+                        type="radio"
+                        name="check"
+                        value={producto.precioventa}
+                        checked={
+                          presentacion == producto.precioventa ? true : false
+                        }
+                        onChange={(e) => changePresent(e)}
+                      />
+                      <label
+                        htmlFor="extras"
+                        className="flex w-full items-center justify-between"
+                      >
+                        <span>Doble</span>
+                        <span>${producto.precioventa}</span>
+                      </label>
+                    </div>
+                  </li>
+                  <li className=" w-full">
+                    <div className="flex gap-1 ">
+                      <input
+                        id="extras"
+                        type="radio"
+                        name="check"
+                        value={producto.precioTriple}
+                        checked={
+                          presentacion == producto.precioTriple ? true : false
+                        }
+                        onChange={(e) => changePresent(e)}
+                      />
+                      <label
+                        htmlFor="extras"
+                        className="flex w-full items-center justify-between"
+                      >
+                        <span>Triple</span>
+                        <span>${producto.precioTriple}</span>
+                      </label>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
             <div className="descripcion">
@@ -166,7 +232,7 @@ const ProductoNormal = (props) => {
                   </button>
                 </div>
                 <div className=" border border-secondary text-secondary md:text-base p-1 text-sm w-1/2 rounded-[20px] flex items-center justify-center font-bold">
-                  <span>${producto.precioventa * producto.cantidadForm}</span>
+                  <span>${precioFinal * producto.cantidadForm}</span>
                 </div>
               </div>
               <div className="w-[50%] rounded-[20px]">

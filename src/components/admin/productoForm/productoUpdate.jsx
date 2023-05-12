@@ -7,6 +7,8 @@ import ImageForm from './imageForm';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import ServUsos from '../../../utils/usos.utils';
+import Link from 'next/link';
+
 const ProductoUpdate = (props) => {
   const [formulario, setFormulario] = useState({
     idart: '',
@@ -669,6 +671,16 @@ const ProductoUpdate = (props) => {
                   )}
                 </div>
               </div>
+            </div>
+            <div>
+              <Link
+                className="bg-secondary text-white shadow py-1 uppercase h-10  px-14 text-sm
+                    font-bold text-light rounded-[20px]
+                   md:text-sm flex items-center justify-between"
+                href={'/admin?s=productos'}
+              >
+                Volver
+              </Link>
             </div>
           </div>
         </div>
