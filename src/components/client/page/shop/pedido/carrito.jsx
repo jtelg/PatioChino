@@ -41,7 +41,7 @@ const Carrito = (props) => {
 
   const totalCarro = () => {
     return arr_cartprods?.reduce(
-      (a, b) => a + b.precioventa * b.cantidadForm,
+      (a, b) => a + b.precioFinal * b.cantidadForm,
       0
     );
   };
@@ -115,7 +115,7 @@ const Carrito = (props) => {
                       onClick={(ev) => redirectProductoPage(ev, prod.modelo)}
                       aria-hidden
                     >
-                      $ {prod.precioventa * prod.cantidadForm}
+                      $ {prod.precioFinal * prod.cantidadForm}
                     </span>
                   </div>
                 </div>

@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { CARRITO_ADD, CARRITO_DELETE } from '../../../../../redux/actions';
+// import { CARRITO_ADD, CARRITO_DELETE } from '../../../../../redux/actions';
 import APIConsultas from '../../../../../services/consultas';
 import Carousel from '../../../../utils/carousel';
-import ContadorProd from '../../../../utils/contadorProd';
+// import ContadorProd from '../../../../utils/contadorProd';
 import servUsos from '../../../../../utils/usos.utils';
 const CardShop = ({ props, loading }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [producto, setProducto] = useState(props);
   const [arr_imgs, setArr_imgs] = useState([]);
-  const [prodinCart, setProdinCart] = useState(false);
+  // const [prodinCart, setProdinCart] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       if (props.typeCatalog === 0) {
@@ -35,7 +35,7 @@ const CardShop = ({ props, loading }) => {
   useEffect(() => {
     if (!loading) {
       const prod = arr_cartprods?.find((prod) => prod.idart === props.idart);
-      setProdinCart(!!prod);
+      // setProdinCart(!!prod);
       const cantidadForm = prod ? prod.cantidadForm : 1;
       setProducto({
         ...props,
@@ -45,27 +45,27 @@ const CardShop = ({ props, loading }) => {
     }
   }, [arr_cartprods, props, loading]);
 
-  const agregarCarrito = () => {
-    dispatch(CARRITO_ADD(producto));
-  };
+  // const agregarCarrito = () => {
+  //   dispatch(CARRITO_ADD(producto));
+  // };
 
-  const changeData = (data) => {
-    if (prodinCart) {
-      const indexProd = arr_cartprods.findIndex(
-        (prod) => prod.idart === data.idart
-      );
-      const newarr = arr_cartprods;
-      newarr[indexProd] = data;
-      dispatch(CARRITO_ADD(data));
-    }
-    setProducto({
-      ...data
-    });
-  };
+  // const changeData = (data) => {
+  //   if (prodinCart) {
+  //     const indexProd = arr_cartprods.findIndex(
+  //       (prod) => prod.idart === data.idart
+  //     );
+  //     const newarr = arr_cartprods;
+  //     newarr[indexProd] = data;
+  //     dispatch(CARRITO_ADD(data));
+  //   }
+  //   setProducto({
+  //     ...data
+  //   });
+  // };
 
-  const eliminarCarrito = (prod) => {
-    dispatch(CARRITO_DELETE(prod));
-  };
+  // const eliminarCarrito = (prod) => {
+  //   dispatch(CARRITO_DELETE(prod));
+  // };
 
   return (
     <>
@@ -81,7 +81,7 @@ const CardShop = ({ props, loading }) => {
                   )}`
                 )
               }
-              className="absolute top-3 left-5 text-3xl text-white z-10 hover:text-primary-500 transition-all"
+              className="absolute top-3 right-5 text-3xl text-white z-10 w-[40px] h-[40px] rounded-full duration-300 bg-primary-500 hover:bg-[#c14801]"
             >
               <span className="material-icons-outlined">visibility</span>
             </button>
@@ -111,8 +111,8 @@ const CardShop = ({ props, loading }) => {
               >
                 {producto.modelo}
               </h1>
-              <p>{producto.descripBreve}</p>
-              <div className="info">
+              <p>{producto.descripcion}</p>
+              {/* <div className="info">
                 {producto.cantidadForm && (
                   <ContadorProd
                     prod={producto}
@@ -139,7 +139,7 @@ const CardShop = ({ props, loading }) => {
                     </button>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           </>
         ) : (
@@ -155,7 +155,7 @@ const CardShop = ({ props, loading }) => {
           background: #ffffff;
           border-radius: 12px;
           width: 330px;
-          height: 430px;
+          height: 400px;
         }
         .contCard:hover {
           box-shadow: 0px 2px 15px rgba(0, 0, 0, 30%);

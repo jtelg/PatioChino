@@ -14,24 +14,9 @@ const postReducer = (state = initialState, action) => {
         arr_nav: action.payload
       };
     case 'CARRITO_ADD':
-      if (state.CART_DATA) {
-        index_exist = state.CART_DATA.findIndex((d) => {
-          return (
-            d.idart === action.payload.idart &&
-            d.color === action.payload.color &&
-            d.talle === action.payload.talle
-          );
-        });
-      }
-      if (index_exist > -1) {
-        // state.CART_DATA[index_exist].cantidad += action.payload.cantidadForm;
-        state.CART_DATA[index_exist].cantidadForm = action.payload.cantidadForm;
-        state.CART_DATA[index_exist].comentario = action.payload.comentario;
-        data = state.CART_DATA;
-      } else {
-        action.payload.cantidad = action.payload.cantidadForm;
-        data = [...(state.CART_DATA ? state.CART_DATA : []), action.payload];
-      }
+      action.payload.cantidad = action.payload.cantidadForm;
+      data = [...(state.CART_DATA ? state.CART_DATA : []), action.payload];
+
       localStorage.setToStorage('arr_carro', data);
       return {
         ...state,
