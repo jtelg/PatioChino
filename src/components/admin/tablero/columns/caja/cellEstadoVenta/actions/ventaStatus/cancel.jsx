@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ServUsos from '../../../../../../../../utils/usos.utils';
 import APIConsultas from '../../../../../../../../services/consultas';
-import { useRouter } from 'next/router';
 import utilsOrderStatus from '../../../../../../../../utils/order.utils';
 
 const Anular = (props) => {
