@@ -6,7 +6,6 @@ import utilsOrderStatus from '../../../../../../../../utils/order.utils';
 
 const Anular = (props) => {
   const [data, setData] = useState(``);
-  const router = useRouter();
 
   const onChange = (e) => {
     e.preventDefault();
