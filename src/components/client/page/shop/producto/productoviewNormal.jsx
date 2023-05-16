@@ -194,11 +194,7 @@ const ProductoNormal = (props) => {
                           type="radio"
                           name="check"
                           value="Doble"
-                          checked={
-                            presentacion.precio == producto.precioventa
-                              ? true
-                              : false
-                          }
+                          checked={presentacion.precio == producto.precioventa}
                           onChange={(e) => changePresent(e)}
                         />
                         <label
@@ -217,11 +213,7 @@ const ProductoNormal = (props) => {
                           type="radio"
                           name="check"
                           value="Triple"
-                          checked={
-                            presentacion.precio == producto.precioTriple
-                              ? true
-                              : false
-                          }
+                          checked={presentacion.precio == producto.precioTriple}
                           onChange={(e) => changePresent(e)}
                         />
                         <label
