@@ -27,7 +27,6 @@ import GridConfig from './gridConfig';
 const Tablero = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  // const arrVentas = useSelector((s) => s.arrVentas);
   const reloadTablero = useSelector((s) => s.reloadTablero);
 
   const [arrEgresos, setArrEgresos] = useState([]);
@@ -100,8 +99,6 @@ const Tablero = (props) => {
         setArr_use(data);
       });
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.selector, props.idcajaURL]);
 
   useEffect(() => {
@@ -132,7 +129,6 @@ const Tablero = (props) => {
     ) {
       fetchDataCaja(props.idcajaURL);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.idcajaURL, props.selector]);
 
   useEffect(() => {

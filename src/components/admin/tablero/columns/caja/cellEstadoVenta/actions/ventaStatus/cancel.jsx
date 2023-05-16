@@ -42,7 +42,6 @@ const Anular = (props) => {
       APIConsultas.ventas.UPDATE_XCAMPO(fechaUpd, true);
       APIConsultas.ventas.UPDATE_XCAMPO(porqueUpd, true);
       props.close();
-      router.reload(window.location.pathname);
     } catch (error) {
       console.error(`UPDATE_SEGUIMIENTO ${error}`);
     }

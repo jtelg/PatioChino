@@ -4,7 +4,6 @@ import APIConsultas from '../../../../../../../../services/consultas';
 import utilsOrderStatus from '../../../../../../../../utils/order.utils';
 import ServUsos from '../../../../../../../../utils/usos.utils';
 import TicketOrder from '../../../../../../ventas/ticketOrder';
-// import ServUsos from '../../../../../../../../utils/usos.utils';
 
 const OrderPending = (props) => {
   const [dateNow, setDateNow] = useState(``);
@@ -51,6 +50,7 @@ const OrderPending = (props) => {
       setDatosVenta({ ...datosVenta, fecha_tablero: `${dateNow}:00` });
       handlePrint();
       props.close();
+      window.location.reload(false);
     } catch (error) {
       console.error(`UPDATE_SEGUIMIENTO ${error}`);
     }
