@@ -22,7 +22,7 @@ class TicketOrder extends React.Component {
 
   render() {
     return (
-      <div className="flex max-w-[235px]">
+      <div className="flex max-w-[250px]">
         <section className="flex flex-col justify-center gap-4 mt-2 w-full">
           <div className="w-full text-center">
             <p className="text-lg">Ticket de compra</p>
@@ -79,7 +79,9 @@ class TicketOrder extends React.Component {
                 {this.state.productos.map((prod, index) => (
                   <li key={index} className="flex justify-between items-center">
                     <p className="font-bold w-1/4">{prod.cantidad}x</p>
-                    <p className="font-bold w-full">{prod.modelo}</p>
+                    <p className="font-bold w-full">
+                      {prod.modelo} ({prod.presentacion})
+                    </p>
                     <p className="text-sm font-bold w-1/4">
                       ${+prod.precioventa.toLocaleString('de')}
                     </p>

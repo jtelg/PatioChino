@@ -17,6 +17,7 @@ const Carrito = (props) => {
   useEffect(() => {
     setarr_cartprods(data_cart);
     setUser(session?.user || session);
+    console.log(data_cart);
   }, [data_cart, session]);
 
   const handleOpen = (ev) => {
@@ -26,7 +27,7 @@ const Carrito = (props) => {
 
   const changeData = (data) => {
     const indexProd = arr_cartprods.findIndex(
-      (prod) => prod.idart === data.idart
+      (prod) => prod.numPedido === data.numPedido
     );
     const newarr = arr_cartprods;
     newarr[indexProd] = data;
@@ -79,6 +80,9 @@ const Carrito = (props) => {
                       aria-hidden
                     >
                       <b>{prod.modelo}</b>
+                      <p className="text-xs font-semibold  normal-case">
+                        ({prod.presentacion})
+                      </p>
                     </span>
                     <span
                       className="material-icons-outlined text-lg cursor-pointer text-red-400"

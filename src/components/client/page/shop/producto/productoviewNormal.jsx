@@ -5,13 +5,19 @@ import APIConsultas from '../../../../../services/consultas';
 import Link from 'next/link';
 import Carousel from '../../../../utils/carousel';
 import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 const ProdNormalUse = (props) => {
   const dispatch = useDispatch();
   const [producto, setProducto] = useState(props.data_prod);
   const [arr_imgs, setArr_imgs] = useState([]);
-  const [presentacion, setPresentacion] = useState(props.data_prod.precioventa);
+  const [presentacion, setPresentacion] = useState({
+    tipo: 'Doble',
+    precio: props.data_prod.precioventa
+  });
   const [precioFinal, setPrecioFinal] = useState(props.data_prod.precioventa);
+  const [cantForm, setcantForm] = useState(1);
 
   const router = useRouter();
   useEffect(() => {
@@ -42,27 +48,25 @@ const ProdNormalUse = (props) => {
     const prod = arr_cartprods?.find(
       (prod) => prod.idart === props.data_prod.idart
     );
-    const cantidadForm = prod ? prod.cantidadForm : 1;
+    props.data_prod.presentacion = presentacion.tipo;
     const comentario = prod ? prod.comentario : '';
+    props.data_prod.precioFinal = precioFinal;
     setProducto({
       ...props.data_prod,
-      cantidadForm,
-      comentario,
-      precioFinal
+      comentario
     });
-    props.data_prod.cantidadForm = cantidadForm;
   }, [arr_cartprods, props.data_prod, precioFinal]);
 
   const CountChange = (index) => {
-    let count = producto.cantidadForm;
+    let count = cantForm;
     if (index === 'resta') {
       count = count === 1 ? 1 : count - 1;
     } else {
       count = count + 1;
     }
+    setcantForm(count);
     setProducto({
       ...producto,
-      cantidadForm: count,
       precioTotal: props.data_prod.precioventa * count
     });
   };
@@ -74,12 +78,27 @@ const ProdNormalUse = (props) => {
     });
   };
   const agregarCarrito = () => {
+    const pedido = producto;
+    pedido.numPedido = uuidv4();
+    pedido.cantidadForm = cantForm;
+    setProducto(pedido);
     dispatch(CARRITO_ADD(producto));
+    return toast.success(`Producto agregado al carrito`, {
+      autoClose: 1000
+    });
   };
 
   const changePresent = (e) => {
-    setPresentacion(e.target.value);
-    setPrecioFinal(e.target.value);
+    let valor = { tipo: 'Doble', precio: producto.precioventa };
+    if (e.target.value === 'Doble') {
+      valor = { tipo: 'Doble', precio: producto.precioventa };
+    } else {
+      valor = { tipo: 'Triple', precio: producto.precioTriple };
+    }
+    setProducto({ ...producto, presentacion: valor.tipo });
+    setPresentacion(valor);
+    setPrecioFinal(valor.precio);
+    setcantForm(1);
   };
 
   return {
@@ -92,7 +111,8 @@ const ProdNormalUse = (props) => {
     router,
     presentacion,
     changePresent,
-    precioFinal
+    precioFinal,
+    cantForm
   };
 };
 
@@ -107,14 +127,15 @@ const ProductoNormal = (props) => {
     router,
     presentacion,
     changePresent,
-    precioFinal
+    precioFinal,
+    cantForm
   } = ProdNormalUse(props);
   return (
     <>
       <div className="flex  justify-between items-center pb-2 md:pt-3 pt-[80px]  px-4 gap-3">
         <div className=" w-full flex  justify-between  py-4 items-start  border-b-2 border-[#DEDBD3] relative">
           <div className="flex items-center gap-1  relative top-4 sm:top-0">
-            <Link href="/shop">
+            <Link href={`/shop/${producto.categoria}`}>
               <i className="bx bx-chevron-left text-3xl font-bold text-primary-500"></i>
             </Link>
             <span className=" tracking-wide text-lg Outfit text-secondary font-bold">
@@ -157,59 +178,66 @@ const ProductoNormal = (props) => {
               <div className="descripcion md:h-[80px] md:mt-3 mt-1 ">
                 <p className="text-sm">{producto.descripcion}</p>
               </div>
-              <div className="border-y py-4">
-                <h1 className="text-base font-bold">Presentacion</h1>
-                <ul className="w-full text-sm space-y-1">
-                  <li className="w-full flex items-center justify-between">
-                    <span className="text-gray-400 font-semibold">
-                      Seleccioná las opciones que quieras.
-                    </span>
-                  </li>
-                  <li className="w-full">
-                    <div className="flex gap-1 ">
-                      <input
-                        id="extras"
-                        type="radio"
-                        name="check"
-                        value={producto.precioventa}
-                        checked={
-                          presentacion == producto.precioventa ? true : false
-                        }
-                        onChange={(e) => changePresent(e)}
-                      />
-                      <label
-                        htmlFor="extras"
-                        className="flex w-full items-center justify-between"
-                      >
-                        <span>Doble</span>
-                        <span>${producto.precioventa}</span>
-                      </label>
-                    </div>
-                  </li>
-                  <li className=" w-full">
-                    <div className="flex gap-1 ">
-                      <input
-                        id="extras"
-                        type="radio"
-                        name="check"
-                        value={producto.precioTriple}
-                        checked={
-                          presentacion == producto.precioTriple ? true : false
-                        }
-                        onChange={(e) => changePresent(e)}
-                      />
-                      <label
-                        htmlFor="extras"
-                        className="flex w-full items-center justify-between"
-                      >
-                        <span>Triple</span>
-                        <span>${producto.precioTriple}</span>
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              {producto.categoria === 'Hamburguesas' && (
+                <div className="border-y py-4">
+                  <h1 className="text-base font-bold">Presentacion</h1>
+                  <ul className="w-full text-sm space-y-1">
+                    <li className="w-full flex items-center justify-between">
+                      <span className="text-gray-400 font-semibold">
+                        Seleccioná las opciones que quieras.
+                      </span>
+                    </li>
+                    <li className="w-full">
+                      <div className="flex gap-1 ">
+                        <input
+                          id="extras"
+                          type="radio"
+                          name="check"
+                          value="Doble"
+                          checked={
+                            presentacion.precio == producto.precioventa
+                              ? true
+                              : false
+                          }
+                          onChange={(e) => changePresent(e)}
+                        />
+                        <label
+                          htmlFor="extras"
+                          className="flex w-full items-center justify-between"
+                        >
+                          <span>Doble</span>
+                          <span>${producto.precioventa}</span>
+                        </label>
+                      </div>
+                    </li>
+                    <li className=" w-full">
+                      <div className="flex gap-1 ">
+                        <input
+                          id="extras"
+                          type="radio"
+                          name="check"
+                          value="Triple"
+                          checked={
+                            presentacion.precio == producto.precioTriple
+                              ? true
+                              : false
+                          }
+                          onChange={(e) => changePresent(e)}
+                        />
+                        <label
+                          htmlFor="extras"
+                          className="flex w-full items-center justify-between"
+                        >
+                          <span>Triple</span>
+                          <span>${producto.precioTriple}</span>
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
+
             <div className="descripcion">
               <b>Comentario extra:</b>
               <textarea
@@ -226,13 +254,13 @@ const ProductoNormal = (props) => {
                   <button onClick={() => CountChange('resta')}>
                     <span>-</span>
                   </button>
-                  <p>{producto.cantidadForm}</p>
+                  <p>{cantForm}</p>
                   <button onClick={() => CountChange('suma')}>
                     <span>+</span>
                   </button>
                 </div>
                 <div className=" border border-secondary text-secondary md:text-base p-1 text-sm w-1/2 rounded-[20px] flex items-center justify-center font-bold">
-                  <span>${precioFinal * producto.cantidadForm}</span>
+                  <span>${precioFinal * cantForm}</span>
                 </div>
               </div>
               <div className="w-[50%] rounded-[20px]">

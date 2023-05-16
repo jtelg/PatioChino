@@ -124,15 +124,15 @@ const ctrlVenta = {
     let string = '';
     req.body.arrProd.forEach((prod) => {
       string += `('${idventa}', '${prod.idart}', '${null}', '${null}',
-       '${prod.precioventa}', '${prod.cantidadForm}', '${
+       '${prod.precioFinal}', '${prod.cantidadForm}', '${
         prod.comentario || ''
-      }'),`;
+      }','${prod.presentacion}'),`;
     });
     string = string.substring(0, string.length - 1);
 
     const sqlS = `
         INSERT INTO
-          artxventa (idventa, idart, nomcolor, size, precioventa, cantidad, comentario)
+          artxventa (idventa, idart, nomcolor, size, precioventa, cantidad, comentario, presentacion)
         VALUES
           ${string};`;
     try {

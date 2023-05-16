@@ -12,8 +12,8 @@ const CategFilters = ({ categorias, href }) => {
               className={`${
                 href === arr.nombre
                   ? 'bg-secondary text-white'
-                  : 'text-secondary'
-              } font-bold h-full flex items-center justify-center px-2 min-w-[150px] Outfit py-2 hover:bg-[#f7f4eb]`}
+                  : 'text-secondary hover:bg-[#f7f4eb]'
+              } font-bold h-full flex items-center justify-center px-2 min-w-[150px] Outfit py-2 `}
             >
               <Link href={`/shop/${arr.nombre}`} className="w-full text-center">
                 {arr.nombre}

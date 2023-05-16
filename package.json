@@ -29,7 +29,8 @@
     "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.10",
     "sweetalert2": "^11.7.3",
-    "swiper": "^9.2.4"
+    "swiper": "^9.2.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.0.0",

@@ -41,10 +41,11 @@ const PedidoFloat = (props) => {
           <button className="text-xl uppercase tracking-tighter  text-white font-bold">
             Ver mi pedido
           </button>
+
           <button className="text-xl font-bold text-white">
             $
             {arr_cartprods
-              ?.reduce((a, b) => a + b.precioventa * b.cantidadForm, 0)
+              ?.reduce((a, b) => a + b.precioFinal * b.cantidadForm, 0)
               .toLocaleString('de')}
           </button>
         </div>
