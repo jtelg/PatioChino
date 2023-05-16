@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 // import { CARRITO_ADD, CARRITO_DELETE } from '../../../../../redux/actions';
 import APIConsultas from '../../../../../services/consultas';
@@ -7,7 +7,7 @@ import Carousel from '../../../../utils/carousel';
 // import ContadorProd from '../../../../utils/contadorProd';
 import servUsos from '../../../../../utils/usos.utils';
 const CardShop = ({ props, loading }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const router = useRouter();
   const [producto, setProducto] = useState(props);
   const [arr_imgs, setArr_imgs] = useState([]);
