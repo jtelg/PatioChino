@@ -61,6 +61,7 @@ class CajaClose extends Component {
     }
     Swal.close();
     this.setState({ modal: false });
+    window.location.reload(false);
   }
 
   render() {

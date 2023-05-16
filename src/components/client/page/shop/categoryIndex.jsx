@@ -18,7 +18,7 @@ class CategoryIndex extends Component {
   render() {
     return (
       <>
-        <section className="flex w-full justify-center pt-4  heightCont overflow-y-auto pb-8">
+        <section className="flex w-full justify-center pt-4  heightCont  pb-8">
           <article className=" w-full rounded flex flex-col justify-between">
             <ul className="gap-4 rounded mb-4 gridResponsive">
               {this.state.arrCategs.map((c, i) => (

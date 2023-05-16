@@ -26,10 +26,6 @@ const CategxProd = (props) => {
           </div>
         </article>
       </section>
-      {/* <style jsx>{`
-        .contCard {
-        }
-      `}</style> */}
     </>
   );
 };
