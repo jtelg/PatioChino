@@ -38,13 +38,9 @@ const Carousel = ({
         {images?.map((img, index) => (
           <SwiperSlide className="w-full bg-white overflow-hidden " key={index}>
             <div className={`relative ${height}`}>
-              <Image
+              <img
                 src={img}
-                alt=""
-                layout="fill"
-                loading="lazy"
-                width={100}
-                height={100}
+                alt="foto"
                 className="w-full h-full object-cover"
               />
             </div>

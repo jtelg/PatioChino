@@ -81,7 +81,7 @@ const CardShop = ({ props, loading }) => {
                   )}`
                 )
               }
-              className="absolute top-3 right-5 text-3xl text-white z-10 w-[40px] h-[40px] rounded-full duration-300 bg-primary-500 hover:bg-[#c14801]"
+              className="absolute top-3 right-5 text-3xl text-white z-10 w-[40px] h-[40px] flex justify-center items-center rounded-full duration-300 bg-primary-500 hover:bg-[#c14801]"
             >
               <span className="material-icons-outlined">visibility</span>
             </button>

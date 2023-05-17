@@ -418,7 +418,7 @@ const APIConsultas = {
         return dataprod;
       }
     },
-    GET_SHOP: async (categ, subcateg, offset = 0, limit = 10, visible = 0) => {
+    GET_SHOP: async (categ, subcateg, offset = 0, limit = 100, visible = 0) => {
       const url = `/api/producto?path=PRODUCTO_GET_LIST&offset=${offset}&limit=${limit}&idcateg=${categ}&idsubc=${subcateg}&visible=${visible}`;
       const resprod = await fetch(url);
       let dataprod = null;
