@@ -1,5 +1,6 @@
 import React from 'react';
-import CarouselHome from './utils/carousel';
+import CarouselHomeDesk from './utils/carousel';
+import CarouselMob from './utils/carouselMob';
 import ListCard from './utils/listCard/listCard';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -22,8 +23,11 @@ const Home = () => {
             Hacé tu pedido
           </button>
         </div>
-        <div className="md:mb-[150px] mb-4  ">
-          <CarouselHome></CarouselHome>
+        <div className="md:mb-[150px] mb-4  md:block hidden ">
+          <CarouselHomeDesk></CarouselHomeDesk>
+        </div>
+        <div className="md:mb-[150px] mb-4  md:hidden ">
+          <CarouselMob></CarouselMob>
         </div>
         <div className="my-4">
           <div className="w-full bg-white md:rounded-[40px] rounded-[20px] md:p-4 p-2 md:mb-12 mb-3 boxShadow">

@@ -9,18 +9,18 @@ import 'swiper/css/pagination';
 // import required modules
 import { Navigation, Pagination } from 'swiper';
 
-const arr_img = [
+const arr_imgMob = [
   {
     id: 1,
-    img: '/media/EjemploHome1.png'
+    img: '/media/EjemploHome2mob.png'
   },
   {
     id: 2,
-    img: '/media/EjemploHome2.png'
+    img: '/media/EjemploHome1mob.png'
   }
 ];
 
-export default function Carousel() {
+export default function CarouselMob() {
   return (
     <>
       <Swiper
@@ -34,7 +34,7 @@ export default function Carousel() {
         modules={[Pagination, Navigation]}
         className="mySwiper  md:rounded-[40px] rounded-[20px] boxShadow"
       >
-        {arr_img.map((img) => (
+        {arr_imgMob.map((img) => (
           <SwiperSlide key={img.id} className="w-full h-full">
             <img src={img.img} alt="foto" className=" w-full h-full" />
           </SwiperSlide>
@@ -43,5 +43,3 @@ export default function Carousel() {
     </>
   );
 }
-
-// className="h-full bg-white rounded-[40px] "

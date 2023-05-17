@@ -108,7 +108,7 @@ a {
 
 .swiper-button-prev {
   color: white !important;
-  background-color: #1b72bf;
+  background-color: #f2762e;
   border: white 2px solid;
   border-radius: 100%;
   width: 30px !important;
@@ -124,7 +124,7 @@ a {
 }
 .swiper-button-next {
   color: white !important;
-  background-color: #1b72bf;
+  background-color: #f2762e;
   border: white 2px solid;
   border-radius: 100%;
   width: 30px !important;
@@ -161,7 +161,7 @@ a {
 }
 .gridResponsive {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   gap: 2rem;
   padding-bottom: 5rem;
 }
