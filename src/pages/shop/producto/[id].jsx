@@ -30,30 +30,9 @@ const Producto = (props) => {
         <meta name="description" content={producto?.descripcion} />
         <link rel="icon" href="/media/logoPatio.png" />
       </Head>
-      {/* {arr_cartprods?.length > 0 && <CartSide CART_DATA={arr_cartprods} />}{' '} */}
       {!loading && <ProductoNormal {...props} data_prod={producto} />}
     </>
   );
 };
 
 export default Producto;
-// export async function getServerSideProps(context) {
-//   const idprod = servusos.convertUrl(context.query.id, 'revert');
-//   const dataprod = await APIConsultas.producto.GET_XID(idprod);
-//   if (dataprod) {
-//     return {
-//       props: {
-//         data_prod: dataprod
-//       }
-//     };
-//   }
-//   return {
-//     redirect: {
-//       destination: '/',
-//       permanent: false
-//     }
-//   };
-//   //   if (res) {
-//   //     res.writeHead(301, { Location: '/' }).end();
-//   //   }
-// }

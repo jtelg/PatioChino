@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import APIConsultas from '../../../../../services/consultas';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
-import senderFRONT from '../../../../../utils/senderwpp.utils';
 import { CARRITO_DELETE_ALL } from '../../../../../redux/actions';
 
 const style = {
@@ -84,7 +83,7 @@ const ModalEnvioUse = (arr_cartprods, open, setOpen, user) => {
   };
   const venta_add = () => {
     const total = arr_cartprods.reduce(
-      (a, b) => a + b.precioventa * b.cantidadForm,
+      (a, b) => a + b.precioFinal * b.cantidadForm,
       0
     );
     const venta = {
@@ -105,7 +104,7 @@ const ModalEnvioUse = (arr_cartprods, open, setOpen, user) => {
       tipo_pago: entrega.tipopago,
       seguimiento_idestado: 1,
       comentario: entrega.comentario,
-      estado: 'No Visible',
+      estado: 'Pendiente',
       anulado_porque: null,
       fec_anulado: null
     };
@@ -122,27 +121,15 @@ const ModalEnvioUse = (arr_cartprods, open, setOpen, user) => {
         showConfirmButton: false
       });
       const obj = venta_add();
-      const re = await APIConsultas.ventas.VENTAS_ADD(
-        obj,
-        arr_cartprods,
-        entrega
-      );
-      // senderFRONT.enviaPedido(
-      //   globalVars[0].valor,
-      //   entrega,
-      //   arr_cartprods,
-      //   re.insertId
-      // );
+      console.log(obj, arr_cartprods, entrega);
+      await APIConsultas.ventas.VENTAS_ADD(obj, arr_cartprods, entrega);
+
       dispatch(CARRITO_DELETE_ALL());
       Swal.close();
       router.push('/');
     } catch (error) {
       console.error('alta de venta ', error);
     }
-
-    // } else {
-    //   return toast.error(`Error al del pedido.`);
-    // }
   };
   return {
     handleClose,

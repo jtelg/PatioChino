@@ -32,7 +32,7 @@ const ModalView = (props) => {
       >
         <Box
           sx={style}
-          className="flex flex-col items-center rounded-xl border-none px-5 py-4 w-auto "
+          className="flex flex-col items-center rounded-xl border-2 border-secondary px-5 py-4 w-auto "
         >
           <Typography
             id="modal-modal-title"

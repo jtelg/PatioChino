@@ -30,7 +30,7 @@ const PedidoFloat = (props) => {
       <div className={`${props.className} `}>
         <div
           className={`${setWidth()} flex justify-between h-14 px-4  duration-300 transform
-         items-center bg-white fixed bottom-0 z-[90] cursor-pointer border-t-4 border-primary-500 Outfit ${
+         items-center bg-primary-500 fixed bottom-0 z-[90] cursor-pointer border-t-4 border-primary-500 Outfit ${
            arr_cartprods?.length > 0
              ? 'translate-y-0 ease-out'
              : 'translate-y-full ease-in'
@@ -38,13 +38,14 @@ const PedidoFloat = (props) => {
           onClick={() => modalCtrl()}
           aria-hidden
         >
-          <button className="text-xl uppercase tracking-tighter  text-secondary font-bold">
+          <button className="text-xl uppercase tracking-tighter  text-white font-bold">
             Ver mi pedido
           </button>
-          <button className="text-xl font-bold text-secondary">
+
+          <button className="text-xl font-bold text-white">
             $
             {arr_cartprods
-              ?.reduce((a, b) => a + b.precioventa * b.cantidadForm, 0)
+              ?.reduce((a, b) => a + b.precioFinal * b.cantidadForm, 0)
               .toLocaleString('de')}
           </button>
         </div>

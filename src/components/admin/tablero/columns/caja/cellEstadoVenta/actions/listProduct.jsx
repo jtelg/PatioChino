@@ -24,18 +24,9 @@ const ListProduct = ({ datosVenta, props }) => {
       {!loading ? (
         <>
           <div>
-            {/* button to trigger printing of target component */}
-            {/* <ReactToPrint
-              trigger={() => (
-                <button className="absolute right-[11%] top-[5.2%] text-sm uppercase bg-secondary-500 text-white px-3 py-1 rounded">
-                  Imprimir
-                </button>
-              )}
-              content={() => componentRef}
-            /> */}
             <button
               onClick={handlePrint}
-              className="absolute right-[11%] top-[5.2%] text-sm uppercase bg-secondary-500 text-white px-3 py-1 rounded"
+              className="absolute right-[11%] top-[5.2%] text-sm uppercase bg-secondary text-white px-3 py-1 rounded"
             >
               Imprimir
             </button>
@@ -61,6 +52,7 @@ const ListProduct = ({ datosVenta, props }) => {
                     <div className="flex justify-between items-center">
                       <span className="uppercase font-bold text-sm">
                         <b>{prod.modelo}</b>
+                        <p>({prod.presentacion})</p>
                       </span>
                       <span className=" justify-end flex font-bold text-[14px]">
                         <b>{prod.cantidad} x</b>

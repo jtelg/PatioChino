@@ -1,16 +1,24 @@
-import { CARRITO_ADD, CARRITO_DELETE } from '../../../../../redux/actions';
+import { CARRITO_ADD } from '../../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import APIConsultas from '../../../../../services/consultas';
 import Link from 'next/link';
 import Carousel from '../../../../utils/carousel';
-import Boton from '../../../../utils/button';
 import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 const ProdNormalUse = (props) => {
   const dispatch = useDispatch();
   const [producto, setProducto] = useState(props.data_prod);
   const [arr_imgs, setArr_imgs] = useState([]);
+  const [presentacion, setPresentacion] = useState({
+    tipo: 'Doble',
+    precio: props.data_prod.precioventa
+  });
+  const [precioFinal, setPrecioFinal] = useState(props.data_prod.precioventa);
+  const [cantForm, setcantForm] = useState(1);
+
   const router = useRouter();
   useEffect(() => {
     if (props.data_prod.typeCatalog === 0) {
@@ -40,26 +48,25 @@ const ProdNormalUse = (props) => {
     const prod = arr_cartprods?.find(
       (prod) => prod.idart === props.data_prod.idart
     );
-    const cantidadForm = prod ? prod.cantidadForm : 1;
+    props.data_prod.presentacion = presentacion.tipo;
     const comentario = prod ? prod.comentario : '';
+    props.data_prod.precioFinal = precioFinal;
     setProducto({
       ...props.data_prod,
-      cantidadForm,
       comentario
     });
-    props.data_prod.cantidadForm = cantidadForm;
-  }, [arr_cartprods, props.data_prod]);
+  }, [arr_cartprods, props.data_prod, precioFinal]);
 
   const CountChange = (index) => {
-    let count = producto.cantidadForm;
+    let count = cantForm;
     if (index === 'resta') {
       count = count === 1 ? 1 : count - 1;
     } else {
       count = count + 1;
     }
+    setcantForm(count);
     setProducto({
       ...producto,
-      cantidadForm: count,
       precioTotal: props.data_prod.precioventa * count
     });
   };
@@ -71,7 +78,27 @@ const ProdNormalUse = (props) => {
     });
   };
   const agregarCarrito = () => {
+    const pedido = producto;
+    pedido.numPedido = uuidv4();
+    pedido.cantidadForm = cantForm;
+    setProducto(pedido);
     dispatch(CARRITO_ADD(producto));
+    return toast.success(`Producto agregado al carrito`, {
+      autoClose: 1000
+    });
+  };
+
+  const changePresent = (e) => {
+    let valor = { tipo: 'Doble', precio: producto.precioventa };
+    if (e.target.value === 'Doble') {
+      valor = { tipo: 'Doble', precio: producto.precioventa };
+    } else {
+      valor = { tipo: 'Triple', precio: producto.precioTriple };
+    }
+    setProducto({ ...producto, presentacion: valor.tipo });
+    setPresentacion(valor);
+    setPrecioFinal(valor.precio);
+    setcantForm(1);
   };
 
   return {
@@ -81,7 +108,11 @@ const ProdNormalUse = (props) => {
     CountChange,
     agregarCarrito,
     onChange,
-    router
+    router,
+    presentacion,
+    changePresent,
+    precioFinal,
+    cantForm
   };
 };
 
@@ -93,14 +124,18 @@ const ProductoNormal = (props) => {
     CountChange,
     agregarCarrito,
     onChange,
-    router
+    router,
+    presentacion,
+    changePresent,
+    precioFinal,
+    cantForm
   } = ProdNormalUse(props);
   return (
     <>
-      <div className="flex justify-between items-center pb-2 pt-3 px-4 gap-3">
-        <div className=" w-full flex  justify-between  py-4 items-start  border-b-2 border-[#DEDBD3]">
+      <div className="flex  justify-between items-center pb-2 md:pt-3 pt-[80px]  px-4 gap-3">
+        <div className=" w-full flex  justify-between  py-4 items-start  border-b-2 border-[#DEDBD3] relative">
           <div className="flex items-center gap-1  relative top-4 sm:top-0">
-            <Link href="/shop">
+            <Link href={`/shop/${producto.categoria}`}>
               <i className="bx bx-chevron-left text-3xl font-bold text-primary-500"></i>
             </Link>
             <span className=" tracking-wide text-lg Outfit text-secondary font-bold">
@@ -108,7 +143,7 @@ const ProductoNormal = (props) => {
             </span>
           </div>
           {arr_cartprods?.length > 0 && (
-            <div className="relative top-1 right-1 hidden lg:flex items-center justify-center">
+            <div className="relative md:top-1 top-3 right-1  lg:flex items-center justify-center">
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-[1.4rem] h-[1.4rem] flex items-center justify-center rounded-full  border-2 border-[#f7f4eb]">
                 {arr_cartprods.length}
               </span>
@@ -123,7 +158,7 @@ const ProductoNormal = (props) => {
         </div>
       </div>
       <div className="p-4 ">
-        <div className="bg-white flex rounded-[20px] overflow-hidden shadow">
+        <div className="bg-white flex md:flex-row flex-col rounded-[20px] overflow-hidden shadow">
           <div className="cardLeft">
             <div className="w-full overflow-hidden flex justify-center">
               <Carousel
@@ -131,27 +166,76 @@ const ProductoNormal = (props) => {
                 images={arr_imgs}
                 info={false}
                 buttons={true}
-                height=" h-[70vh]"
+                height=" md:h-[70vh] h-[30vh]"
               />
             </div>
           </div>
-          <div className="w-[50%] flex flex-col p-4 h-full justify-between gap-4 Outfit">
+          <div className="md:w-[50%] flex flex-col p-4 h-full justify-between md:gap-4 gap-1 Outfit">
             <div>
-              <h1 className="text-3xl font-bold text-secondary ">
+              <h1 className="md:text-3xl text-2xl font-bold text-secondary ">
                 {producto.modelo}
               </h1>
-              <div className="descripcion h-[200px] mt-3">
+              <div className="descripcion md:h-[80px] md:mt-3 mt-1 ">
                 <p className="text-sm">{producto.descripcion}</p>
               </div>
+              {producto.categoria === 'Hamburguesas' && (
+                <div className="border-y py-4">
+                  <h1 className="text-base font-bold">Presentacion</h1>
+                  <ul className="w-full text-sm space-y-1">
+                    <li className="w-full flex items-center justify-between">
+                      <span className="text-gray-400 font-semibold">
+                        Seleccioná las opciones que quieras.
+                      </span>
+                    </li>
+                    <li className="w-full">
+                      <div className="flex gap-1 ">
+                        <input
+                          id="extras"
+                          type="radio"
+                          name="check"
+                          value="Doble"
+                          checked={presentacion.precio == producto.precioventa}
+                          onChange={(e) => changePresent(e)}
+                        />
+                        <label
+                          htmlFor="extras"
+                          className="flex w-full items-center justify-between"
+                        >
+                          <span>Doble</span>
+                          <span>${producto.precioventa}</span>
+                        </label>
+                      </div>
+                    </li>
+                    <li className=" w-full">
+                      <div className="flex gap-1 ">
+                        <input
+                          id="extras"
+                          type="radio"
+                          name="check"
+                          value="Triple"
+                          checked={presentacion.precio == producto.precioTriple}
+                          onChange={(e) => changePresent(e)}
+                        />
+                        <label
+                          htmlFor="extras"
+                          className="flex w-full items-center justify-between"
+                        >
+                          <span>Triple</span>
+                          <span>${producto.precioTriple}</span>
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
+
             <div className="descripcion">
               <b>Comentario extra:</b>
               <textarea
                 name="comentario"
                 id="comentario"
-                cols="10"
-                rows="3"
-                className="border-[1px] text-base rounded-xl outline-none border-black px-4 py-2 mt-2"
+                className="border-[1px] text-base rounded-xl outline-none border-black px-4 py-2 mt-2 md:h-[100px] h-[70px]"
                 onChange={onChange}
                 value={producto.comentario}
               ></textarea>
@@ -162,25 +246,23 @@ const ProductoNormal = (props) => {
                   <button onClick={() => CountChange('resta')}>
                     <span>-</span>
                   </button>
-                  <p>{producto.cantidadForm}</p>
+                  <p>{cantForm}</p>
                   <button onClick={() => CountChange('suma')}>
                     <span>+</span>
                   </button>
                 </div>
-                <div className=" border border-secondary text-secondary w-1/2 rounded-[20px] flex items-center justify-center font-bold">
-                  <span>${producto.precioventa * producto.cantidadForm}</span>
+                <div className=" border border-secondary text-secondary md:text-base p-1 text-sm w-1/2 rounded-[20px] flex items-center justify-center font-bold">
+                  <span>${precioFinal * cantForm}</span>
                 </div>
               </div>
               <div className="w-[50%] rounded-[20px]">
-                <Boton
-                  color={'primary'}
+                <button
                   onClick={() => agregarCarrito()}
-                  paddingX={'1rem'}
-                  bRadius={'20px'}
+                  className="bg-[#092640] text-white flex gap-1 items-center justify-center w-full py-1 rounded-[20px] shadow md:text-base text-sm"
                 >
                   <span className="material-icons"> shopping_cart </span>
                   Añadir al carrito
-                </Boton>
+                </button>
               </div>
             </div>
           </div>

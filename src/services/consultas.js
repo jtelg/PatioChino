@@ -160,10 +160,11 @@ const APIConsultas = {
       // const url = `${baseUrl}/botwppClient`;
       // const url = `${baseUrl}/api/wppbot?path=SEND_MESSAGE`;
       const url = `${process.env.NEXT_PUBLIC_URL_BOT_API}/api/sender`;
-      console.log();
-      const re = await fetch(url, options);
-      if (re.ok) return true;
-      return false;
+      try {
+        const re = await fetch(url, options);
+        if (re.ok) return true;
+        return false;
+      } catch (error) {}
     }
   },
   ventas: {

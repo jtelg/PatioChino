@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import ServUsos from '../../../../../../../../utils/usos.utils';
 import APIConsultas from '../../../../../../../../services/consultas';
-import { useRouter } from 'next/router';
+import utilsOrderStatus from '../../../../../../../../utils/order.utils';
 
 const Anular = (props) => {
   const [data, setData] = useState(``);
-  const router = useRouter();
 
   const onChange = (e) => {
     e.preventDefault();
@@ -16,6 +15,12 @@ const Anular = (props) => {
     let dateNowUse = ServUsos.newDateMysql().replace(' ', 'T');
     dateNowUse = dateNowUse.substring(0, dateNowUse.length - 3);
     try {
+      utilsOrderStatus.orderStatusChange(
+        props.datosVenta,
+        `${new Date().toISOString().split('T')[0]} ${dateNowUse}`,
+        'confirmado_time',
+        5
+      );
       const estadoUpd = {
         idventa: props.datosVenta.idventa,
         campo: 'estado',
@@ -35,7 +40,6 @@ const Anular = (props) => {
       APIConsultas.ventas.UPDATE_XCAMPO(fechaUpd, true);
       APIConsultas.ventas.UPDATE_XCAMPO(porqueUpd, true);
       props.close();
-      router.reload(window.location.pathname);
     } catch (error) {
       console.error(`UPDATE_SEGUIMIENTO ${error}`);
     }

@@ -4,7 +4,7 @@ const Card = ({ info }) => {
   const [clas, setClas] = useState(false);
 
   return (
-    <div className="md:w-[25%] md:min-w-[25%] min-w-[80%] h-[370px] flex even:text-white CardHome overflow-hidden">
+    <div className="md:w-[25%] md:min-w-[25%] min-w-[80%] h-1/2 flex even:text-white CardHome overflow-hidden">
       {/* CARD IZQUIERDA */}
       <div
         className={`w-full min-w-full max-w-full h-full rounded-[20px] relative overflow-hidden duration-500  boxShadow  ${
