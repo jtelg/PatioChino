@@ -17,7 +17,6 @@ const Carrito = (props) => {
   useEffect(() => {
     setarr_cartprods(data_cart);
     setUser(session?.user || session);
-    console.log(data_cart);
   }, [data_cart, session]);
 
   const handleOpen = (ev) => {

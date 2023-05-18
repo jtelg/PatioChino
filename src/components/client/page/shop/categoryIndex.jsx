@@ -24,7 +24,7 @@ class CategoryIndex extends Component {
               {this.state.arrCategs.map((c, i) => (
                 <a
                   key={i}
-                  href={`/shop/${c.nombre}`}
+                  href={`/shop/Todo#${c.nombre}`}
                   className="flex justify-center   "
                 >
                   <div
