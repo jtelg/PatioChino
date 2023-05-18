@@ -1,12 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
 
-const CategFilters = ({ categorias, href }) => {
+const CategFilters = ({ categorias }) => {
+  const [href, sethref] = useState('Hamburguesas');
   return (
     <>
       <div className="flex justify-between buttonsFilter h-full ">
         <ul className="flex bg-white gap-2 items-center buttonsFilter rounded-[18px] boxShadow ">
-          {categorias.arrCategs?.map((arr, index) => (
+          {categorias?.map((arr, index) => (
             <li
               key={index}
               className={`${
@@ -15,9 +15,13 @@ const CategFilters = ({ categorias, href }) => {
                   : 'text-secondary hover:bg-[#f7f4eb]'
               } font-bold h-full flex items-center justify-center px-2 min-w-[150px] Outfit py-2 `}
             >
-              <Link href={`/shop/${arr.nombre}`} className="w-full text-center">
+              <a
+                href={`#${arr.nombre}`}
+                onClick={() => sethref(arr.nombre)}
+                className="w-full text-center"
+              >
                 {arr.nombre}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>

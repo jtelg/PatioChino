@@ -40,6 +40,7 @@ const Carousel = ({
             <div className={`relative ${height}`}>
               <img
                 src={img}
+                // src="/media/Bum-bum.png"
                 alt="foto"
                 className="w-full h-full object-cover"
               />

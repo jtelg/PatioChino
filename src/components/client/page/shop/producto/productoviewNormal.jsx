@@ -142,19 +142,6 @@ const ProductoNormal = (props) => {
               Volver a la carta
             </span>
           </div>
-          {arr_cartprods?.length > 0 && (
-            <div className="relative md:top-1 top-3 right-1  lg:flex items-center justify-center">
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-[1.4rem] h-[1.4rem] flex items-center justify-center rounded-full  border-2 border-[#f7f4eb]">
-                {arr_cartprods.length}
-              </span>
-              <button
-                onClick={() => router.push('/resumen')}
-                className="bg-primary-500 text-white p-1 rounded-full w-10 h-10 flex items-center justify-center boxShadow"
-              >
-                <i className="bx bx-cart text-2xl font-thin"></i>
-              </button>
-            </div>
-          )}
         </div>
       </div>
       <div className="p-4 ">

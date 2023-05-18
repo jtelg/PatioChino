@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import CategxProd from '../../components/client/page/shop/categProd';
 import Filtros from '../../components/client/page/shop/filtros';
+import APIConsultas from '../../services/consultas';
 
 const ShopID = (props) => {
   const [params, setParams] = useState(props.ShopID.categ);
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    let categs = [];
+    APIConsultas.categoria.TODO(true).then((repscateg) => {
+      categs = repscateg.filter((c) => c.nombre !== 'No definido');
+      categs.unshift({ idcateg: 0, nombre: 'Todo' });
+      setCategorias(categs);
+    });
+  }, []);
 
   return (
     <>
@@ -13,11 +24,11 @@ const ShopID = (props) => {
         <meta name="description" content="Tienda online de comida rapida" />
         <link rel="icon" href="/media/logoPatio.png" />
       </Head>
-      <div className="p-4 md:pt-4 pt-[120px] ">
-        <div>
-          <Filtros setParams={setParams}></Filtros>
+      <div className="md:pt-0 pt-[120px] ">
+        <div className="md:sticky fixed md:top-0  top-[85px] z-20 w-full ">
+          <Filtros setParams={setParams} categorias={categorias}></Filtros>
         </div>
-        <CategxProd categ={params} />
+        <CategxProd categ={params} categorias={categorias} />
       </div>
     </>
   );

@@ -72,19 +72,6 @@ const CardShop = ({ props, loading }) => {
       <div className={`contCard relative overflow-hidden boxShadow`}>
         {!loading ? (
           <>
-            <button
-              onClick={() =>
-                router.push(
-                  `/shop/producto/${servUsos.convertUrl(
-                    producto.modelo,
-                    'convert'
-                  )}`
-                )
-              }
-              className="absolute top-3 right-5 text-3xl text-white z-10 w-[40px] h-[40px] flex justify-center items-center rounded-full duration-300 bg-primary-500 hover:bg-[#c14801]"
-            >
-              <span className="material-icons-outlined">visibility</span>
-            </button>
             <div className="contfoto">
               <div className="w-full h-full overflow-hidden flex justify-center">
                 <Carousel
@@ -96,10 +83,10 @@ const CardShop = ({ props, loading }) => {
                 />
               </div>
             </div>
-            <div className="contInfo Outfit">
+            <div className="contInfo Outfit ">
               <h1
                 aria-hidden
-                className=" font-bold text-secondary "
+                className=" font-bold text-secondary Recoleta text-[50px]"
                 onClick={() =>
                   router.push(
                     `/shop/producto/${servUsos.convertUrl(
@@ -111,35 +98,22 @@ const CardShop = ({ props, loading }) => {
               >
                 {producto.modelo}
               </h1>
-              <p>{producto.descripcion}</p>
-              {/* <div className="info">
-                {producto.cantidadForm && (
-                  <ContadorProd
-                    prod={producto}
-                    actualizaProd={(data) => changeData(data)}
-                  />
-                )}
-
-                <div className="precio">
-                  <span>${producto.precioventa * producto.cantidadForm}</span>
-                </div>
-                <div className="cartButton">
-                  {!prodinCart ? (
-                    <button onClick={agregarCarrito} className="bg-gray-900">
-                      <span className="material-icons">add_shopping_cart</span>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => eliminarCarrito(producto)}
-                      className="bg-white shadow-md"
-                    >
-                      <span className="material-icons ">
-                        remove_shopping_cart
-                      </span>
-                    </button>
-                  )}
-                </div>
-              </div> */}
+              <div className="flex gap-2 h-[75px]">
+                <p className="flex-1 leading-4">{producto.descripcion}</p>
+                <button
+                  onClick={() =>
+                    router.push(
+                      `/shop/producto/${servUsos.convertUrl(
+                        producto.modelo,
+                        'convert'
+                      )}`
+                    )
+                  }
+                  className="self-end text-white z-10 w-[40px] h-[40px] flex justify-center items-center rounded-full duration-300 hover:bg-primary-500 bg-[#092640]"
+                >
+                  <i className="bx bxs-cart-add text-2xl"></i>
+                </button>
+              </div>
             </div>
           </>
         ) : (
@@ -153,7 +127,7 @@ const CardShop = ({ props, loading }) => {
         .contCard {
           /* border: 1px solid black; */
           background: #ffffff;
-          border-radius: 12px;
+          border-radius: 18px;
           width: 330px;
           height: 400px;
         }
@@ -180,7 +154,7 @@ const CardShop = ({ props, loading }) => {
 
         .contInfo h1 {
           margin: 0;
-          font-size: 20px;
+          font-size: 30px;
           cursor: pointer;
           text-transform: capitalize !important;
         }
@@ -231,7 +205,6 @@ const CardShop = ({ props, loading }) => {
 
         @media only screen and (max-width: 1024px) {
           .contInfo h1 {
-            font-size: 18px;
           }
           @media only screen and (max-width: 1352px) {
             .contCard  {

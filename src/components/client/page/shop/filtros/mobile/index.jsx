@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-const CategFilterMobile = ({ categorias, router, href }) => {
-  const [personName, setPersonName] = useState(href);
-
-  const handleChange = (event) => {
-    const {
-      target: { value }
-    } = event;
-    setPersonName(value);
-    router.push(`/shop/${value}`);
-  };
+const CategFilterMobile = ({ categorias }) => {
+  const [href, setHref] = useState('Hamburguesas');
 
   return (
-    <div className="text-white rounded-[20px] Outfit">
-      <FormControl
+    <div className="text-secondary  Outfit w-full ">
+      <ul className="flex gap-4 w-screen">
+        {categorias?.map((name) =>
+          name.nombre === 'Todo' ? (
+            <button
+              key={name.nombre}
+              className="flex items-center justify-center"
+            >
+              <i className="bx bx-chevrons-up text-2xl"></i>
+            </button>
+          ) : (
+            <a
+              key={name.nombre}
+              onClick={() => setHref(name.nombre)}
+              href={`#${name.nombre}`}
+            >
+              <li
+                className={`flex items-center justify-center  ${
+                  href === name.nombre &&
+                  'border-b-2 border-b-secondary font-semibold'
+                } `}
+              >
+                {name.nombre}
+              </li>
+            </a>
+          )
+        )}
+      </ul>
+      {/* <FormControl
         sx={{
           width: 300,
           background: '#1B72BF',
@@ -40,7 +54,7 @@ const CategFilterMobile = ({ categorias, router, href }) => {
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
+      </FormControl> */}
     </div>
   );
 };

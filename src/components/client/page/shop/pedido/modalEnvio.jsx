@@ -121,7 +121,6 @@ const ModalEnvioUse = (arr_cartprods, open, setOpen, user) => {
         showConfirmButton: false
       });
       const obj = venta_add();
-      console.log(obj, arr_cartprods, entrega);
       await APIConsultas.ventas.VENTAS_ADD(obj, arr_cartprods, entrega);
 
       dispatch(CARRITO_DELETE_ALL());

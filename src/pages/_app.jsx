@@ -7,6 +7,8 @@ import Session from '../components/client/userSession';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useEffect } from 'react';
+
 const ctrlUrl = (Component, router) => {
   return (
     router.pathname !== '/resumen' &&
@@ -21,11 +23,22 @@ function MyApp({ Component, pageProps }) {
   pageProps.appName = 'Patio Chino';
   pageProps.addres = 'Bv Carcano 469';
 
+  useEffect(() => {
+    const scroll = document.getElementById('contenedor');
+    scroll.addEventListener('scroll', handlerScroll);
+  }, []);
+
+  const handlerScroll = () => {
+    let y = window;
+    console.log(y);
+  };
+
   return (
     <Session comp={Component}>
       <div className="flex md:flex-row flex-col ">
         <Header></Header>
         <div
+          id="contenedor"
           className={`h-screen lg:overflow-y-auto overflow-x-hidden w-full lg:pb-0 `}
         >
           <Component {...pageProps} />
