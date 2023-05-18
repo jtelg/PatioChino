@@ -103,7 +103,6 @@ const ProdNormalUse = (props) => {
 
   return {
     producto,
-    arr_cartprods,
     arr_imgs,
     CountChange,
     agregarCarrito,
@@ -119,12 +118,10 @@ const ProdNormalUse = (props) => {
 const ProductoNormal = (props) => {
   const {
     producto,
-    arr_cartprods,
     arr_imgs,
     CountChange,
     agregarCarrito,
     onChange,
-    router,
     presentacion,
     changePresent,
     precioFinal,
