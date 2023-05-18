@@ -1,7 +1,6 @@
 import { Navigation, Pagination, A11y } from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -18,8 +17,6 @@ import 'swiper/css/scrollbar';
 */
 const Carousel = ({
   images = [],
-  info = false,
-  position = 'center',
   buttons = false,
   perView = 1,
   height = 'min-h-screen'

@@ -5,7 +5,6 @@ import Filtros from '../../components/client/page/shop/filtros';
 import APIConsultas from '../../services/consultas';
 
 const ShopID = (props) => {
-  const [params, setParams] = useState(props.ShopID.categ);
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
@@ -26,9 +25,9 @@ const ShopID = (props) => {
       </Head>
       <div className="md:pt-0 pt-[120px] ">
         <div className="md:sticky fixed md:top-0  top-[85px] z-20 w-full ">
-          <Filtros setParams={setParams} categorias={categorias}></Filtros>
+          <Filtros categorias={categorias}></Filtros>
         </div>
-        <CategxProd categ={params} categorias={categorias} />
+        <CategxProd categorias={categorias} />
       </div>
     </>
   );

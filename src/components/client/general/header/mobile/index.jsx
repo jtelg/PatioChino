@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import ServUsos from '../../../../../utils/usos.utils';
-
 const HeaderMobile = ({ personalInfo, pedido }) => {
   const router = useRouter();
   const state = useSelector((s) => s);

@@ -29,8 +29,8 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   const handlerScroll = () => {
-    let y = window;
-    console.log(y);
+    // let y = window;
+    console.log(window.scrollY);
   };
 
   return (
