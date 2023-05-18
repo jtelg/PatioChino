@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import CategFilters from './desktop';
 import CategFilterMobile from './mobile';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const Filtros = ({ setParams, categorias }) => {
+const Filtros = ({ categorias }) => {
   const state_cartprods = useSelector((s) => s.CART_DATA);
 
   const router = useRouter();
-
-  useEffect(() => {
-    setParams(router.asPath.split('/')[2]);
-  }, [router]);
 
   return (
     <div className="bg-[#FAFAFA] px-4 pt-7 border-b-2 border-[#DEDBD3] mb-4 w-full flex justify-between pb-4 ">
