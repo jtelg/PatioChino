@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CategFilters from './desktop';
 import CategFilterMobile from './mobile';
 import { useSelector } from 'react-redux';
