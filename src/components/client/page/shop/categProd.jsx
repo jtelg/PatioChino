@@ -24,7 +24,7 @@ const CategxProd = (props) => {
               <h1 className="font-bold text-secondary text-xl uppercase mb-2">
                 {categ.nombre}
               </h1>
-              <div className="contCard flex flex-wrap justify-between gap-y-4">
+              <div className="contCard flex flex-wrap lg:justify-between justify-center gap-y-4">
                 {arrProductos.map(
                   (e, i) =>
                     categ.nombre === e.categ && (

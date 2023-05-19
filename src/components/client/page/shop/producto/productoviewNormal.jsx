@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import APIConsultas from '../../../../../services/consultas';
 import Link from 'next/link';
-import Carousel from '../../../../utils/carousel';
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 
 const ProdNormalUse = (props) => {
   const dispatch = useDispatch();
+
+  const state_cartprods = useSelector((s) => s.CART_DATA);
+
   const [producto, setProducto] = useState(props.data_prod);
   const [arr_imgs, setArr_imgs] = useState([]);
   const [presentacion, setPresentacion] = useState({
@@ -19,7 +21,6 @@ const ProdNormalUse = (props) => {
   const [precioFinal, setPrecioFinal] = useState(props.data_prod.precioventa);
   const [cantForm, setcantForm] = useState(1);
 
-  const router = useRouter();
   useEffect(() => {
     if (props.data_prod.typeCatalog === 0) {
       APIConsultas.Images.SET_IMAGE(props.data_prod).then((imgs) => {
@@ -107,11 +108,11 @@ const ProdNormalUse = (props) => {
     CountChange,
     agregarCarrito,
     onChange,
-    router,
     presentacion,
     changePresent,
     precioFinal,
-    cantForm
+    cantForm,
+    state_cartprods
   };
 };
 
@@ -125,7 +126,8 @@ const ProductoNormal = (props) => {
     presentacion,
     changePresent,
     precioFinal,
-    cantForm
+    cantForm,
+    state_cartprods
   } = ProdNormalUse(props);
   return (
     <>
@@ -139,18 +141,29 @@ const ProductoNormal = (props) => {
               Volver a la carta
             </span>
           </div>
+          <div className="relative md:block hidden">
+            <Link
+              href={'/resumen'}
+              className="bg-primary-500 text-white p-6 md:p-4 rounded-full w-10 h-10 flex items-center justify-center boxShadow"
+            >
+              <i className="bx bx-cart text-2xl font-thin"></i>
+            </Link>
+            {state_cartprods?.length > 0 && (
+              <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-[1.4rem] h-[1.4rem] flex items-center justify-center rounded-full  border-2 border-[#f7f4eb]">
+                {state_cartprods.length}
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="p-4 ">
         <div className="bg-white flex md:flex-row flex-col rounded-[20px] overflow-hidden shadow">
           <div className="cardLeft">
             <div className="w-full overflow-hidden flex justify-center">
-              <Carousel
-                perView={1}
-                images={arr_imgs}
-                info={false}
-                buttons={true}
-                height=" md:h-[70vh] h-[30vh]"
+              <img
+                src={arr_imgs[0]}
+                alt="foto"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -159,7 +172,7 @@ const ProductoNormal = (props) => {
               <h1 className="md:text-3xl text-2xl font-bold text-secondary ">
                 {producto.modelo}
               </h1>
-              <div className="descripcion md:h-[80px] md:mt-3 mt-1 ">
+              <div className="descripcion md:h-[80px] md:mt-3 mt-1 pb-2">
                 <p className="text-sm">{producto.descripcion}</p>
               </div>
               {producto.categoria === 'Hamburguesas' && (
@@ -255,17 +268,16 @@ const ProductoNormal = (props) => {
       <style jsx>{`
         .cardLeft {
           height: 100%;
-          width: 50%;
+          width: 55%;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-top: 5px solid var(--primary);
-          border-bottom: 5px solid var(--primary);
           padding: 0;
           overflow: hidden;
         }
 
         /* .cardLeft img {
+          height:100%
   width: auto;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 40%);
   object-fit: cover;
@@ -285,6 +297,7 @@ const ProductoNormal = (props) => {
         .descripcion {
           display: flex;
           flex-direction: column;
+          margin-bottom: 0.2rem;
         }
         .descripcion b {
           color: var(--primary);

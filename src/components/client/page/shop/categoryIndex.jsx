@@ -9,7 +9,9 @@ class CategoryIndex extends Component {
   async componentDidMount() {
     let categs = [];
     APIConsultas.categoria.TODO(true).then((repscateg) => {
-      categs = repscateg.filter((c) => c.nombre !== 'No definido');
+      categs = repscateg.filter(
+        (c) => c.nombre !== 'No definido' && c.visible !== 0
+      );
       categs.push({ idcateg: 0, nombre: 'Todo' });
       this.setState({ arrCategs: categs });
     });

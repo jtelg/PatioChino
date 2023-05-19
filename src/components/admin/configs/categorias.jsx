@@ -17,43 +17,46 @@ const style = {
   p: 4
 };
 
-const Accionesfull = (setSub_categ, setCateg) => {
+const Accionesfull = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [rows, setRows] = useState([]);
   const [name, setName] = useState('');
-  const [subcateg, setSubcateg] = useState([]);
   const columns = [
-    { field: 'idcateg', headerName: 'ID', width: 100 },
+    { field: 'idcateg', headerName: 'ID', flex: 0.5 },
     {
       field: 'nombre',
       headerName: 'Nombre',
-      width: 250,
+      flex: 2,
       editable: true
     },
     {
       headerName: 'Actions',
       field: 'actions',
-      width: 100,
+      flex: 0.5,
       type: 'actions',
       getActions: (params) => [
         <GridActionsCellItem
           key={2}
-          label="Eliminar articulo"
-          onClick={(e) => onClickAction(e, 'delete', params)}
+          label="Desbloquear Categoria"
+          title="Desbloquear Categoria"
+          className={`${params.row.visible === 1 && 'hidden w-0'}`}
+          onClick={(e) => onClickAction(e, 'novisible', params)}
           icon={
-            <span className="material-icons-outlined text-red-600 text-2xl">
-              delete_forever
-            </span>
+            <i className={` bx bx-low-vision text-secondary-500 text-2xl `}></i>
           }
         />,
         <GridActionsCellItem
           key={2}
-          label="Ver sub categorias"
-          onClick={(e) => onClickAction(e, 'subcateg', params)}
+          label="Bloquar Categoria"
+          title="Bloquar Categoria"
+          className={`${params.row.visible === 0 && 'hidden w-0'}`}
+          onClick={(e) => onClickAction(e, 'visble', params)}
           icon={
-            <span className="material-icons-outlined text-secondary-500 text-2xl">
+            <span
+              className={`material-icons-outlined text-secondary-500 text-2xl `}
+            >
               visibility
             </span>
           }
@@ -68,10 +71,6 @@ const Accionesfull = (setSub_categ, setCateg) => {
     };
     fetchData().catch(console.error);
   }, []);
-
-  useEffect(() => {
-    setSub_categ(subcateg);
-  }, [setSub_categ, subcateg]);
 
   const getData = async () => {
     const categs = (await APIConsultas.categoria.TODO(true)).filter(
@@ -90,10 +89,30 @@ const Accionesfull = (setSub_categ, setCateg) => {
       } else {
         return toast.error(`Error al eliminar el campo.`);
       }
-    } else if (ind === 'subcateg') {
-      const res = await APIConsultas.subCategorias.GET_XID(params.id, true);
-      setCateg(params.row);
-      setSubcateg(res.filter((c) => c.nombre !== 'No definido'));
+    } else if (ind === 'visble') {
+      const res = await APIConsultas.categoria.UPDATE_VISIBLE(
+        params.id,
+        0,
+        true
+      );
+      if (res) {
+        getData();
+        return toast.success(`Campo Oculto `);
+      } else {
+        return toast.error(`Error al actualizar.`);
+      }
+    } else if (ind === 'novisible') {
+      const res = await APIConsultas.categoria.UPDATE_VISIBLE(
+        params.id,
+        1,
+        true
+      );
+      if (res) {
+        getData();
+        return toast.success(`Campo Visible`);
+      } else {
+        return toast.error(`Error al actualizar.`);
+      }
     }
   };
 
@@ -116,6 +135,12 @@ const Accionesfull = (setSub_categ, setCateg) => {
       }
     }
   };
+  const handleEvent = (
+    params, // GridRowParams
+    e
+  ) => {
+    onClickAction(e, 'subcateg', params);
+  };
   return {
     addCateg,
     edit,
@@ -127,11 +152,11 @@ const Accionesfull = (setSub_categ, setCateg) => {
     columns,
     name,
     setName,
-    subcateg
+    handleEvent
   };
 };
 
-const Categorias = ({ setSub_categ, setCateg }) => {
+const Categorias = () => {
   const {
     addCateg,
     edit,
@@ -141,13 +166,14 @@ const Categorias = ({ setSub_categ, setCateg }) => {
     open,
     columns,
     name,
-    setName
-  } = Accionesfull(setSub_categ, setCateg);
+    setName,
+    handleEvent
+  } = Accionesfull();
 
   return (
     <>
-      <article className="w-full px-6">
-        <div className="flex flex-col gap-4 justify-center px-5 py-6 shadow-sm rounded-[20px] bg-white border-secondary border-2">
+      <article className="w-full px-2">
+        <div className="flex flex-col gap-4 justify-center px-5 py-6 shadow-sm rounded-[20px] bg-white border-2 border-secondary">
           <div className="flex justify-between   ">
             <h1 className="text-secondary text-lg uppercase text-left font-bold font-commuter">
               Categorias
@@ -170,6 +196,7 @@ const Categorias = ({ setSub_categ, setCateg }) => {
               onCellEditCommit={(values) => edit(values)}
               showCellRightBorder={true}
               showColumnRightBorder={true}
+              onRowClick={handleEvent}
             />
           </div>
         </div>

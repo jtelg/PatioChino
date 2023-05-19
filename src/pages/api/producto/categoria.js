@@ -58,6 +58,14 @@ export default async function handler(req, res) {
                     m.nombre = '${req.body.valor}'
                 WHERE m.idmarca = '${req.body.id}';`;
             break;
+          case 'UPDATE_VISIBLE':
+            sql = `
+                  UPDATE categoria c
+                set
+                    c.visible = '${req.body.valor}'
+                WHERE c.idcateg = '${req.body.id}';`;
+            APPLY_GET_NEW(sql, res, resolve);
+            return;
         }
         APPLY_GET(sql, res, resolve);
         return;
@@ -81,17 +89,22 @@ export default async function handler(req, res) {
   });
 }
 
-// const upd_categ = (req, res, resolve) => {
-//   sql = `
-//   UPDATE categoria c
-// set
-//     c.nombre = '${req.body.valor}'
-// WHERE c.idcateg = '${req.body.id}';`
-// }
 const APPLY_GET = async (sql, res, resolve) => {
   try {
     const [result] = await conexionDB.query(sql);
     res.write(JSON.stringify(result[0]));
+    res.end();
+  } catch (error) {
+    console.error(error);
+    res.status(500).end();
+    return resolve();
+  }
+};
+
+const APPLY_GET_NEW = async (sql, res, resolve) => {
+  try {
+    const [result] = await conexionDB.query(sql);
+    res.write(JSON.stringify(result));
     res.end();
   } catch (error) {
     console.error(error);

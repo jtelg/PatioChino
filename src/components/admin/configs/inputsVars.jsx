@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import APIConsultas from '../../../services/consultas';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 const InputsVar = (props) => {
@@ -38,27 +39,26 @@ const InputsVar = (props) => {
   };
   return (
     <>
-      <div className="pl-4 w-full flex   py-4 items-start  border-b-2 border-[#DEDBD3]">
-        <div className="flex items-center gap-1  relative top-4 sm:top-0">
-          <Link href="/admin">
-            <i className="bx bx-chevron-left text-3xl font-bold text-primary-500"></i>
-          </Link>
-          <span className=" tracking-wide text-lg Outfit text-secondary font-bold">
-            Volver al tablero
-          </span>
+      <div className="flex  justify-between items-center  md:pt-0 pt-[80px]  px-4 gap-3">
+        <div className=" w-full flex  justify-between  py-4 items-start  relative">
+          <div className="flex items-center gap-1  relative top-4 sm:top-0">
+            <Link href={`/admin`}>
+              <i className="bx bx-chevron-left text-3xl font-bold text-primary-500"></i>
+            </Link>
+            <span className=" tracking-wide text-lg Outfit text-secondary font-bold">
+              Volver al tablero
+            </span>
+          </div>
         </div>
       </div>
-      <form className="grid grid-cols-1 gap-4 md:grid-cols-4 w-full px-4 border-b-2 border-[#DEDBD3] py-4 Outfit">
+      <form className="grid grid-cols-1 gap-4 md:grid-cols-4 w-full p-4 Outfit border-y-2 border-[#DEDBD3]">
         {variablesNew?.map((el, index) => (
           <div key={index} className="grid grid-cols-1 w-full">
-            <label
-              title="wpp"
-              className=" text-sm text-[#092640] font-bold text-light md:text-sm"
-            >
+            <label title="wpp" className="font-bold ">
               {el.nombre.slice(7)}
             </label>
             <input
-              className="px-3 h-10 rounded-[20px] border-2  border-secondary "
+              className="px-3 h-10 rounded-[20px] border-2 border-secondary mt-1 "
               type="text"
               name={el.nombre}
               defaultValue={el.valor}

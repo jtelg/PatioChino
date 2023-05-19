@@ -7,7 +7,7 @@ import Session from '../components/client/userSession';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 const ctrlUrl = (Component, router) => {
   return (
@@ -23,15 +23,14 @@ function MyApp({ Component, pageProps }) {
   pageProps.appName = 'Patio Chino';
   pageProps.addres = 'Bv Carcano 469';
 
-  useEffect(() => {
-    const scroll = document.getElementById('contenedor');
-    scroll.addEventListener('scroll', handlerScroll);
-  }, []);
+  // useEffect(() => {
+  //   const scroll = document.getElementById('contenedor');
+  //   scroll.addEventListener('scroll', handlerScroll);
+  // }, []);
 
-  const handlerScroll = () => {
-    // let y = window;
-    console.log(window.scrollY);
-  };
+  // const handlerScroll = () => {
+  //   window.scrollTo(0, 100);
+  // };
 
   return (
     <Session comp={Component}>

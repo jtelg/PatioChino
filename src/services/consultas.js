@@ -483,6 +483,25 @@ const APIConsultas = {
       }
       return false;
     },
+    UPDATE_VISIBLE: async (id, valor) => {
+      const data = {
+        id,
+        valor
+      };
+      const options = {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      const url = `/api/producto/categoria?path=UPDATE_VISIBLE`;
+      const updres = await fetch(url, options);
+      if (updres.ok) {
+        return true;
+      }
+      return false;
+    },
     DELETE: async (id) => {
       const options = {
         method: 'DELETE',

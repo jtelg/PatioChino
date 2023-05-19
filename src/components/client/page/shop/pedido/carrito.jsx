@@ -55,26 +55,26 @@ const Carrito = (props) => {
     <>
       <section className="flex justify-center   min-h-[200px] overflow-y-auto p-4   Outfit ">
         <div className="w-full  flex flex-col justify-between bg-white p-4 shadow-md rounded-[20px]">
-          <h1 className=" text-secondary font-black">MI PEDIDO</h1>
+          <h1 className=" text-secondary font-black md:text-xl mb-2">
+            MI PEDIDO
+          </h1>
           <ul className="grid md:grid-cols-2 grid-cols-1 gap-4 rounded mb-4">
             {arr_cartprods?.map((prod, index) => (
               <li
                 key={index}
-                className="flex rounded-[10px] gap-4 items-center w-full pr-2  shadow-[0px_1px_10px_rgba(0,0,0,0.14)] bg-white Outfit"
+                className="flex rounded-[10px]  w-full pr-2  shadow-[0px_1px_10px_rgba(0,0,0,0.14)] bg-white Outfit"
               >
-                <div className="h-24 w-24 min-w-[6rem] relative overflow-hidden flex justify-center">
-                  <Carousel
-                    perView={1}
-                    images={prod.images}
-                    info={false}
-                    buttons={false}
-                    height="h-full"
+                <div className="h-auto md:w-[60%] w-[70%] md:min-w-[6rem] relative overflow-hidden flex justify-center">
+                  <img
+                    src={prod.images[0]}
+                    alt="foto"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="w-full md:p-1 p-2 flex flex-col gap-2 ">
+                <div className="w-full md:p-4 p-2 flex flex-col justify-between gap-2 ">
                   <div className="flex justify-between items-center">
                     <span
-                      className="uppercase text-secondary  md:text-sm text-base  cursor-pointer w-full"
+                      className="uppercase text-secondary  md:text-xl text-base  cursor-pointer w-full"
                       onClick={(ev) => redirectProductoPage(ev, prod.modelo)}
                       aria-hidden
                     >
@@ -92,7 +92,7 @@ const Carrito = (props) => {
                     </span>
                   </div>
                   <div
-                    className="overflow-y-auto leading-3 h-[32px] cursor-pointer"
+                    className="overflow-y-auto leading-3 h-[32px] cursor-pointer  md:block hidden"
                     onClick={(ev) => redirectProductoPage(ev, prod.modelo)}
                     aria-hidden
                   >
@@ -100,6 +100,7 @@ const Carrito = (props) => {
                       {prod.descripBreve}
                     </span>
                   </div>
+
                   {prod.comentario && (
                     <div className="overflow-y-auto leading-3 h-[32px] mt-2">
                       <span className="text-xs text-red-400 overflow-hidden sm:max-w-[15rem] relative">
@@ -114,7 +115,7 @@ const Carrito = (props) => {
                     />
 
                     <span
-                      className=" px-8 rounded-[20px] justify-end  cursor-pointer border flex text-secondary"
+                      className=" md:px-8 px-5 rounded-[20px] justify-end  cursor-pointer border flex text-secondary"
                       onClick={(ev) => redirectProductoPage(ev, prod.modelo)}
                       aria-hidden
                     >
@@ -130,8 +131,7 @@ const Carrito = (props) => {
               <span className="uppercase font-bold  text-sm lineFloat ">
                 Total pedido:
               </span>
-              {/* <hr className="w-[83%]"></hr> */}
-              <span className="uppercase font-bold text-primary-600 bg-white overflow-hidden z-[20] pl-1   ">
+              <span className="uppercase font-bold text-primary-600 bg-white overflow-hidden z-[20] pl-1 md:text-xl  ">
                 $ {totalCarro()}
               </span>
             </div>
