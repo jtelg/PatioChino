@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import APIConsultas from '../../../../../services/consultas';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 
