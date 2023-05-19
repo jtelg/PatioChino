@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 
 const CategFilterMobile = ({ categorias }) => {
-  const [href, setHref] = useState('Hamburguesas');
+  const [href, setHref] = useState(1);
 
   return (
     <div className="text-secondary  Outfit w-full ">
       <ul className="flex gap-4 w-screen">
-        {categorias?.map((name) =>
+        {categorias?.map((name, i) =>
           name.nombre === 'Todo' ? (
-            <button
+            <a
               key={name.nombre}
               className="flex items-center justify-center"
+              href={`#${name.nombre}`}
             >
               <i className="bx bx-chevrons-up text-2xl"></i>
-            </button>
+            </a>
           ) : (
             <a
               key={name.nombre}
-              onClick={() => setHref(name.nombre)}
+              onClick={() => setHref(i)}
               href={`#${name.nombre}`}
             >
               <li
                 className={`flex items-center justify-center  ${
-                  href === name.nombre &&
-                  'border-b-2 border-b-secondary font-semibold'
+                  href === i && 'border-b-2 border-b-secondary font-semibold'
                 } `}
               >
                 {name.nombre}
@@ -32,29 +32,6 @@ const CategFilterMobile = ({ categorias }) => {
           )
         )}
       </ul>
-      {/* <FormControl
-        sx={{
-          width: 300,
-          background: '#1B72BF',
-          color: 'white',
-          borderRadius: '20px'
-        }}
-      >
-        <InputLabel id="demo-multiple-name-label">Categorías</InputLabel>
-        <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          value={personName}
-          onChange={handleChange}
-          // input={<OutlinedInput label="Categorías" />}
-        >
-          {categorias.arrCategs?.map((name) => (
-            <MenuItem key={name.nombre} value={name.nombre}>
-              {name.nombre}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl> */}
     </div>
   );
 };

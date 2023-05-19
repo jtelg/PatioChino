@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-// import { CARRITO_ADD, CARRITO_DELETE } from '../../../../../redux/actions';
 import APIConsultas from '../../../../../services/consultas';
-import Carousel from '../../../../utils/carousel';
-// import ContadorProd from '../../../../utils/contadorProd';
 import servUsos from '../../../../../utils/usos.utils';
+
 const CardShop = ({ props, loading }) => {
-  // const dispatch = useDispatch();
+  const arr_cartprods = useSelector((s) => s.CART_DATA);
+
   const router = useRouter();
+
   const [producto, setProducto] = useState(props);
   const [arr_imgs, setArr_imgs] = useState([]);
-  // const [prodinCart, setProdinCart] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       if (props.typeCatalog === 0) {
@@ -31,11 +31,9 @@ const CardShop = ({ props, loading }) => {
     if (!loading) fetchData();
   }, [props, loading]);
 
-  const arr_cartprods = useSelector((s) => s.CART_DATA);
   useEffect(() => {
     if (!loading) {
       const prod = arr_cartprods?.find((prod) => prod.idart === props.idart);
-      // setProdinCart(!!prod);
       const cantidadForm = prod ? prod.cantidadForm : 1;
       setProducto({
         ...props,
@@ -45,28 +43,6 @@ const CardShop = ({ props, loading }) => {
     }
   }, [arr_cartprods, props, loading]);
 
-  // const agregarCarrito = () => {
-  //   dispatch(CARRITO_ADD(producto));
-  // };
-
-  // const changeData = (data) => {
-  //   if (prodinCart) {
-  //     const indexProd = arr_cartprods.findIndex(
-  //       (prod) => prod.idart === data.idart
-  //     );
-  //     const newarr = arr_cartprods;
-  //     newarr[indexProd] = data;
-  //     dispatch(CARRITO_ADD(data));
-  //   }
-  //   setProducto({
-  //     ...data
-  //   });
-  // };
-
-  // const eliminarCarrito = (prod) => {
-  //   dispatch(CARRITO_DELETE(prod));
-  // };
-
   return (
     <>
       <div className={`contCard relative overflow-hidden boxShadow`}>
@@ -74,12 +50,10 @@ const CardShop = ({ props, loading }) => {
           <>
             <div className="contfoto">
               <div className="w-full h-full overflow-hidden flex justify-center">
-                <Carousel
-                  perView={1}
-                  images={arr_imgs}
-                  info={false}
-                  buttons={true}
-                  height="h-full"
+                <img
+                  src={arr_imgs[0]}
+                  alt="foto"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
@@ -136,7 +110,8 @@ const CardShop = ({ props, loading }) => {
         }
         .contfoto {
           overflow: hidden;
-          height: 65%;
+          height: auto;
+          max-height:70%;
           object-fit: cover;
         }
 
@@ -204,13 +179,15 @@ const CardShop = ({ props, loading }) => {
         }
 
         @media only screen and (max-width: 1024px) {
-          .contInfo h1 {
-          }
+          
           @media only screen and (max-width: 1352px) {
-            .contCard  {
-              width:100%;
-
+            .contCard {
+              height: 425px;
+              width: 100%;
             }
+            
+
+            
         }
       `}</style>
     </>

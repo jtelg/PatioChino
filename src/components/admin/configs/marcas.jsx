@@ -133,14 +133,14 @@ const Marcas = ({ setSub_categ, setCateg }) => {
 
   return (
     <>
-      <article className="w-full px-6 Outfit">
-        <div className="flex flex-col gap-4 justify-center px-5 py-6 shadow-sm rounded-[20px] bg-white border-2 border-secondary">
+      <article className="w-full px-6">
+        <div className="flex flex-col gap-4 justify-center px-5 py-6 shadow-sm rounded bg-primary-500">
           <div className="flex justify-between">
-            <h1 className="text-secondary text-lg uppercase text-left font-bold font-commuter">
+            <h1 className="text-white text-lg uppercase text-left font-bold font-commuter">
               Marcas
             </h1>
             <button
-              className="rounded-[20px] shadow-md px-2 py-1 bg-primary-500  font-bold transition-colors text-white"
+              className="rounded shadow-md px-2 py-1 bg-white    font-bold transition-colors"
               onClick={handleOpen}
             >
               + AGREGAR NUEVO
@@ -191,7 +191,7 @@ const Marcas = ({ setSub_categ, setCateg }) => {
                 Nombre
               </label>
               <input
-                className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 text-right outline-none"
+                className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 outline-none"
                 id={name}
                 type="text"
                 value={name}

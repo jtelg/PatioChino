@@ -17,24 +17,29 @@ const style = {
   p: 4
 };
 
-const Accionesfull = (sub_categ, categ) => {
+const Accionesfull = (
+  sub_categ,
+  categ,
+  setCateg_sub_categ,
+  setSelectSub_categ
+) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [rows, setRows] = useState([]);
   const [name, setName] = useState('');
   const columns = [
-    { field: 'idsubc', headerName: 'ID', width: 100 },
+    { field: 'idsubc', headerName: 'ID', flex: 0.5 },
     {
       field: 'nombre',
       headerName: 'Nombre',
-      width: 250,
+      flex: 2,
       editable: true
     },
     {
       headerName: 'Actions',
       field: 'actions',
-      width: 100,
+      flex: 0.5,
       type: 'actions',
       getActions: (params) => [
         <GridActionsCellItem
@@ -50,9 +55,11 @@ const Accionesfull = (sub_categ, categ) => {
       ]
     }
   ];
+
   useEffect(() => {
     setRows(sub_categ);
   }, [sub_categ]);
+
   const getData = async () => {
     const subCategs = (
       await APIConsultas.subCategorias.GET_XID(categ.idcateg, true)
@@ -69,6 +76,13 @@ const Accionesfull = (sub_categ, categ) => {
       } else {
         return toast.error(`Error al eliminar el campo.`);
       }
+    } else if (ind === 'subcateg') {
+      const res = await APIConsultas.subCategorias.GET_CATEG_XID(
+        params.id,
+        true
+      );
+      setSelectSub_categ(params.row);
+      setCateg_sub_categ(res.filter((c) => c.nombre !== 'No definido'));
     }
   };
 
@@ -91,6 +105,12 @@ const Accionesfull = (sub_categ, categ) => {
       }
     }
   };
+  const handleEvent = (
+    params, // GridRowParams
+    e
+  ) => {
+    onClickAction(e, 'subcateg', params);
+  };
   return {
     addCateg,
     edit,
@@ -102,11 +122,17 @@ const Accionesfull = (sub_categ, categ) => {
     columns,
     name,
     setName,
-    setRows
+    setRows,
+    handleEvent
   };
 };
 
-const SubCategorias = ({ sub_categ, categ }) => {
+const SubCategorias = ({
+  sub_categ,
+  categ,
+  setCateg_sub_categ,
+  setSelectSub_categ
+}) => {
   const {
     addCateg,
     edit,
@@ -116,28 +142,26 @@ const SubCategorias = ({ sub_categ, categ }) => {
     open,
     columns,
     name,
-    setName
-  } = Accionesfull(sub_categ, categ);
+    setName,
+    handleEvent
+  } = Accionesfull(sub_categ, categ, setCateg_sub_categ, setSelectSub_categ);
 
   return (
     <>
-      <article className="w-full px-6">
-        <div className="flex flex-col gap-4 justify-center px-5 py-6 shadow-sm rounded-[20px] bg-white border-secondary border-2">
+      <article className="w-full px-2">
+        <div className="flex flex-col gap-4 justify-center px-5 py-6 shadow-sm rounded bg-primary-500">
           <div className="flex justify-between">
-            <h1 className="text-secondary text-base uppercase text-left font-bold w-full flex gap-1 font-commuter">
+            <h1 className="text-white text-lg uppercase text-left font-bold w-full flex gap-1 font-commuter">
               Sub Categorias
-              {categ.nombre && (
-                <p>
-                  de <b>{categ.nombre}</b>
-                </p>
-              )}
             </h1>
-            <button
-              className="rounded-[20px] shadow-md px-2 py-1 font-bold bg-primary-500  text-white transition-colors whitespace-pre"
-              onClick={handleOpen}
-            >
-              + AGREGAR NUEVO
-            </button>
+            {categ.idcateg && (
+              <button
+                className="rounded shadow-md px-2 py-1 font-bold bg-white transition-colors whitespace-pre"
+                onClick={handleOpen}
+              >
+                + AGREGAR NUEVO
+              </button>
+            )}
           </div>
 
           <div className="w-full h-96 bg-white">
@@ -151,6 +175,7 @@ const SubCategorias = ({ sub_categ, categ }) => {
               onCellEditCommit={(values) => edit(values)}
               showCellRightBorder={true}
               showColumnRightBorder={true}
+              onRowClick={handleEvent}
             />
           </div>
         </div>
@@ -183,7 +208,7 @@ const SubCategorias = ({ sub_categ, categ }) => {
                 Nombre
               </label>
               <input
-                className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600 text-right outline-none"
+                className="px-3 h-10 rounded-lg border-2 border-primary-300 mt-1 focus:border-primary-600  outline-none"
                 id={name}
                 type="text"
                 value={name}

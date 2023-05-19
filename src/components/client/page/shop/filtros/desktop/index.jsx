@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const CategFilters = ({ categorias }) => {
-  const [href, sethref] = useState('Hamburguesas');
+  const [href, sethref] = useState('Todo');
   return (
     <>
       <div className="flex justify-between buttonsFilter h-full ">
