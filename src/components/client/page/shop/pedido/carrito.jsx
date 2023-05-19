@@ -1,4 +1,3 @@
-import Carousel from '../../../../utils/carousel';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
