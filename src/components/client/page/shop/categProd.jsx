@@ -21,7 +21,7 @@ const CategxProd = (props) => {
         <article className=" w-full rounded flex flex-col justify-between gap-4">
           {categorias?.map((categ, i) => (
             <div key={i} className=" border-b-2 pb-4" id={categ.nombre}>
-              <h1 className="font-bold text-secondary text-xl uppercase mb-2">
+              <h1 className="font-bold text-secondary text-xl uppercase mb-2 ">
                 {categ.nombre}
               </h1>
               <div className="contCard flex flex-wrap lg:justify-between justify-center gap-y-4">

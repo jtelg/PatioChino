@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
   // }, []);
 
   // const handlerScroll = () => {
-  //   window.scrollTo(0, 100);
+  //   console.log(window);
   // };
 
   return (
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
         <Header></Header>
         <div
           id="contenedor"
-          className={`h-screen lg:overflow-y-auto overflow-x-hidden w-full lg:pb-0 `}
+          className={`h-screen lg:overflow-y-auto overflow-x-hidden w-full lg:pb-0 pb-8 `}
         >
           <Component {...pageProps} />
           <PedidoFloat
