@@ -22,28 +22,24 @@ class CategoryIndex extends Component {
       <>
         <section className="flex w-full justify-center pt-4  heightCont  pb-8">
           <article className=" w-full rounded flex flex-col justify-between">
-            <ul className="gap-4 rounded mb-4 gridResponsive">
+            <ul className="gap-4 mb-4 gridResponsive">
               {this.state.arrCategs.map((c, i) => (
                 <a
                   key={i}
                   href={`/shop/Todo#${c.nombre}`}
-                  className="flex justify-center   "
+                  className="flex justify-center w-full   "
                 >
-                  <div
-                    style={{
-                      boxShadow: 'inset 0 0 0 1000px rgb(0 0 0 / 30%)'
-                    }}
-                    className="relative h-[130px] w-[95%] md:w-96 flex justify-center items-center   gridColumn  overflow-hidden rounded-lg"
-                  >
-                    <div className=" w-full h-full   rounded-lg z-10 flex justify-center items-center blurCateg  ">
+                  <div className="relative flex justify-center items-center     overflow-hidden rounded-lg">
+                    <div className=" w-full h-full absolute top-0 left-0   rounded-lg z-10 flex justify-center items-center   ">
                       <div className="Outfit text-white uppercase font-bold text-xl  ">
                         {c.nombre}
                       </div>
                     </div>
                     <img
-                      src={`https://api.custer.com.ar/patio-chino/categorias/${c.nombre}.jpg`}
+                      // src={`https://api.custer.com.ar/patio-chino/categorias/${c.nombre}.jpg`}
+                      src={'media/CardCateg.png'}
                       alt="foto"
-                      className="absolute top-0 left-0 w-full h-full object-cover z-0"
+                      className=" w-full h-full object-cover z-0"
                     />
                   </div>
                 </a>

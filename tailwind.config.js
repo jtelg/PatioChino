@@ -83,6 +83,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'header-texture': "url('/media/BackgroundHeader.png')",
+        'categoria-texture': "url('/media/CardCateg.png')",
         'mobile-header-texture': "url('/media/BackgroundMobile.png')"
       }
     }

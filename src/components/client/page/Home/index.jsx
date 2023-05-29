@@ -14,7 +14,7 @@ const Home = () => {
         <meta name="description" content="Tienda online de comida rapida" />
         <link rel="icon" href="/media/logoPatio.png" />
       </Head>
-      <div className="px-4 md:pt-4 pt-[90px]">
+      <div className="px-4 md:pt-4 pt-[90px] ">
         <div className="py-4 md:hidden">
           <button
             onClick={() => router.push('/shop')}

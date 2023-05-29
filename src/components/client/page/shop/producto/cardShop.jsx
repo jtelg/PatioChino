@@ -122,7 +122,7 @@ const CardShop = ({ props, loading }) => {
           border-radius: 12px 12px 0 0;
         }
         .contInfo {
-          padding: 0.3rem 1rem;
+          padding: 0.3rem 1rem 1rem 1rem;
           display: flex;
           flex-direction: column;
         }
@@ -182,7 +182,7 @@ const CardShop = ({ props, loading }) => {
           
           @media only screen and (max-width: 1352px) {
             .contCard {
-              height: 425px;
+              height: auto;
               width: 100%;
             }
             
