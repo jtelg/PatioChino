@@ -34,9 +34,9 @@ class SearchProducto extends React.Component {
       const obj = document.getElementById('contenedor');
       if (!obj) return;
       if (!obj.contains(event.target)) {
-        this.setState({ visible: false });
-      } else {
         this.setState({ visible: true });
+      } else {
+        this.setState({ visible: false });
       }
     });
   }
@@ -93,6 +93,7 @@ class SearchProducto extends React.Component {
                 className={`px-3 h-[2.45rem] rounded-[20px] border-secondary transition-all  w-full outline-none ${
                   this.state.visible ? 'border-0' : 'border-2'
                 }`}
+                autoComplete="off"
                 id="search"
                 name="search"
                 type="search"
