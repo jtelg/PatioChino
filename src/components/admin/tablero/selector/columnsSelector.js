@@ -47,7 +47,7 @@ const configCol = {
 
 const egresoCol = {
   descrip: 'En esta lista encontrara todos los egresos registrados en caja',
-  buttonTitle: 'Nueva Orden',
+  buttonTitle: 'Nuevo Egreso',
   icon: 'sell',
   count: 0,
   color: 'green',

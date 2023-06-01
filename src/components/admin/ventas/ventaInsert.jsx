@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import APIConsultas from '../../../services/consultas';
 import ModalView from '../../utils/modalView';
 import { useSelector } from 'react-redux';
-// import ServUsos from '../../../utils/usos.utils';
-import SearchProducto from '../../client/page/shop/producto/searchProducto';
 import ProductoSelect from './productoSelect';
+import SearchProducto from '../../client/page/shop/producto/searchProducto';
 
 const tipoPago = [
   { idtipo: 1, nombre: 'Efectivo' },
@@ -19,7 +18,6 @@ const tipoEntrega = [
 
 const VentaInsert = (props) => {
   const [productos, setProductos] = useState([]);
-  // const [bndProd, setbndProd] = useState(false);
   const globalVars = useSelector((s) => s.globalVars);
   const [userVars, setUserVars] = useState({
     direccion: '',
@@ -31,7 +29,6 @@ const VentaInsert = (props) => {
     entrega: 0
   });
   const dateNowUse = new Date();
-  // dateNowUse = dateNowUse.substring(0, dateNowUse.length - 3);
   const [formulario, setFormulario] = useState({
     nombre: '',
     telefono: '',
@@ -82,7 +79,6 @@ const VentaInsert = (props) => {
   };
   const clickBandera = (ev, value) => {
     ev?.preventDefault();
-    // setbndProd(value);
   };
 
   const venta_add = () => {
