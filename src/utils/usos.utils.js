@@ -58,7 +58,7 @@ const ServUsos = {
   </section>
     `;
     const msjHTML = new DatosSendMsj();
-    msjHTML.to = 'felipeballarino97@gmail.com';
+    msjHTML.to = 'custerok@gmail.com';
     msjHTML.from = obj.mail;
     msjHTML.tema = 'Consulta Patio Chino';
     msjHTML.mensaje = msj;

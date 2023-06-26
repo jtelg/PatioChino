@@ -20,17 +20,8 @@ const ctrlUrl = (Component, router) => {
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   pageProps.phone = '54 9 353 6 570 880';
-  pageProps.appName = 'Patio Chino';
+  pageProps.appName = 'Multicars';
   pageProps.addres = 'Bv Carcano 469';
-
-  // useEffect(() => {
-  //   const scroll = document.getElementById('contenedor');
-  //   scroll.addEventListener('scroll', handlerScroll);
-  // }, []);
-
-  // const handlerScroll = () => {
-  //   console.log(window);
-  // };
 
   return (
     <Session comp={Component}>
