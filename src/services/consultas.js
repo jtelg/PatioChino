@@ -46,16 +46,6 @@ const APIConsultas = {
     }
   },
   usuario: {
-    // auth: async (ctx) => {
-    //   const session1 = await getSession(ctx);
-    //   if (!session1) return null;
-    //   const userres = await fetch(
-    //     `${process.env.NEXTAUTH_URL}/api/user/login?path=USUARIO_GET_EMAIL&email=${session1.user.email}`
-    //   );
-    //   const user = (await userres.json())[0];
-    //   if (user?.role !== 'Admin') return null;
-    //   return user;
-    // },
     session: async (usuario, password, local) => {
       let baseUrl = process.env.NEXTAUTH_URL;
       if (local) baseUrl = '';
